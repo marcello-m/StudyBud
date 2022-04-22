@@ -1,0 +1,65 @@
+#background {
+    background-image: url("img/landing.jpg");
+    height: 100vh;
+}
+
+.button:hover {
+    background-color: #f2a365;
+    color: white;
+}
+
+.campi {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #ececec;
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s
+}
+
+.campi:focus {
+    border-color: #f2a365
+}
+
+.login {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #f2a365;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+    background-color:rgba(242, 163, 101, 0.2)
+}
+
+.login:hover {
+    background: #f2a365;
+    color: white;
+}
+
+.logbox {
+    width: 80%;
+    padding: 10%;
+    top: 50%;
+    left: 50%;
+    position: static;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    border-radius: 50px;
+    text-align: center;
+    transition: 0.25s;
+    margin-top: 20%;
+    background-color:rgba(34, 40, 49, 0.85)
+}
