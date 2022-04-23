@@ -1,5 +1,10 @@
-#background {
+#landing-background {
     background-image: url("img/landing.jpg");
+    height: 100vh;
+}
+
+#site-background {
+    background-image: url("img/sitebg.png");
     height: 100vh;
 }
 
