@@ -68,3 +68,9 @@
     margin-top: 20%;
     background-color:rgba(34, 40, 49, 0.85)
 }
+
+.breadcrumb-link{
+    text-decoration: none;
+    color: #f2a365;
+    font-weight: 500;
+}
