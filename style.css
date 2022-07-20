@@ -81,3 +81,65 @@
     position: absolute; 
     bottom: 5px;
 }
+
+.post-name{
+    text-decoration: none;
+    font-size: 120%;
+    color: rgba(34, 40, 49, 0.85);
+    font-weight: 600;
+}
+
+.post-name:hover{
+    color: rgba(34, 40, 49, 0.85);
+}
+
+.post-course-link{
+    text-decoration: none;
+}
+
+.post-body{
+    margin-bottom: 3%;
+}
+
+.post-button {
+    font-size: 100%;
+    font-weight: 600;
+    color: #f2a365;
+    width: 20%;
+    padding: 0%;
+}
+
+.post-button:hover {
+    border-color: #f2a365;
+}
+
+.post-dropdown {
+    border-color: #c4c4c4;
+}
+
+.post-dropdown:hover{
+    background-color: #eeeeee;
+    color: #30475E;
+}
+
+.post-image{
+    margin-right: 3%;
+    width: 50;
+}
+
+.post-comment-btn{
+    font-size: 80%;
+    font-weight: 500;
+    color: #30475E;
+    background-color: #7ebaf546;
+    border-color: #30475E;
+    width: 30%;
+    padding: 0.5%;
+    display: inline-block;
+}
+
+.post-comment-btn:hover{
+    color: white;
+    background-color: #30475E;
+    border-color: white;
+}
