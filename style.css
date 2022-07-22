@@ -143,3 +143,27 @@
     background-color: #30475E;
     border-color: white;
 }
+
+.save-edit-btn{
+    color: #118302;
+    background-color: #16bb0063;
+    border-color: #118302;
+}
+
+.save-edit-btn:hover{
+    color: white;
+    background-color: #118302;
+    border-color: #118302;
+}
+
+.discard-edit-btn{
+    color: #aa3b3b;
+    background-color: #af4c4c63;
+    border-color: #aa3b3b;
+}
+
+.discard-edit-btn:hover{
+    color: white;
+    background-color: #aa3b3b;
+    border-color: #aa3b3b;
+}
