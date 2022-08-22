@@ -1,11 +1,11 @@
 #landing-background {
-    background-image: url("img/landing.jpg");
+    background-image: url("/img/landing.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
 #site-background {
-    background-image: url("img/sitebg.png");
+    background-image: url("/img/sitebg.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
 }

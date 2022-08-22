@@ -1,12 +1,10 @@
-<title>StudyBud</title>
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="{{url('/')}}/css/style.css">
 </head>
 
 <body>
@@ -18,7 +16,7 @@
   <!-- NAVBAR -->
   <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img height="50" src="\img\Logo.png"><span
+      <a class="navbar-brand" href="#"><img height="50" src="{{url('/')}}/img/Logo.png"><span
           style="font-family: 'Roboto'"></span></a>
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false"
@@ -39,20 +37,6 @@
   </nav>
   <!-- NAVBAR END -->
 
-  <!-- PAGE CENTER -->
-  <!-- Background image -->
-  <div id="landing-background" class="bg-image shadow-2-strong">
-    <div class="mask" style="background-color: rgba(0, 0, 0, 0.3);">
-      <div class="container d-flex align-items-center justify-content-center text-center h-100">
-        <div class="text-white">
-          <h1 style="font-size: 80px">Study<span style="color:#f2a365">Bud</span></h1>
-          <h5 class="mb-4">Il miglior portale per le comunità studentesche</h5>
-          <a class="login btn btn-lg m-2" href="login.html" role="button">Login</a>
-          <a class="login btn btn-lg m-2" href="register.html" role="button">Registrati</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Background image -->
+    @yield('content')
 
-</body>
+    </body>
