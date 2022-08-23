@@ -24,7 +24,7 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img height="50" src="{{url('/')}}/img/Logo.png"><span style="font-family: 'Roboto'"></span></a>
+            <a class="navbar-brand" href="#"><img height="50" src="{{url('/')}}/img/Logo.png"></a>
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,13 +32,16 @@
             <div class="navbar-collapse collapse" id="navbarsExample01">
                 <ul class="navbar-nav me-auto mb-2">
                     <li class="nav-item">
+                        <span style="color:grey;font-weight:600">{{ $loggedName }}</span>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="home.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="profile.php">Profilo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Logout</a>
+                        <a class="nav-link" href="{{ route('user.logout') }}" style="color:red;">Logout</a>
                     </li>
             </div>
         </div>

@@ -1,6 +1,6 @@
 #landing-background {
     background-image: url("/img/landing.jpg");
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-attachment: fixed;
 }
 

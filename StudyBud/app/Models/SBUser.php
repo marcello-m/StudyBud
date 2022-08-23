@@ -9,8 +9,9 @@ class SBUser extends Model
 {
     use HasFactory;
     protected $table = 'sb_users';
-    protected $fillable = ['username','full_name','email','password','institution','degree','major','year','credits','role'];
+    protected $fillable = ['username','full_name','email','password','institution','major','role'];
     protected $primaryKey = 'user_id';
+    public $timestamps = false;
 
     public function posts()
     {

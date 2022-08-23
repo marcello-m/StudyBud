@@ -73,28 +73,24 @@ class DataLayer extends Model
         $post->delete();
     }
 
-    public function editUser($id, $username, $full_name, $email, $password, $institution, $degree, $major, $year, $credits, $role){
+    public function editUser($id, $username, $full_name, $email, $password, $institution, $major, $role){
         $user = SBUser::find($id);
         $user->username = $username;
         $user->full_name = $full_name;
         $user->email = $email;
         $user->password = $password;
         $user->institution = $institution;
-        $user->degree = $degree;
         $user->major = $major;
-        $user->year = $year;
-        $user->credits = $credits;
         $user->role = $role;
         $user->save();
     }
 
-    public function editCourse($id, $name, $professor_id, $institution, $major, $year){
+    public function editCourse($id, $name, $professor_id, $university, $major){
         $course = Course::find($id);
         $course->name = $name;
         $course->professor_id = $professor_id;
-        $course->institution = $institution;
+        $course->university = $university;
         $course->major = $major;
-        $course->year = $year;
         $course->save();
     }
 
@@ -106,28 +102,24 @@ class DataLayer extends Model
         $post->save();
     }
 
-    public function addUser($username, $full_name, $email, $password, $institution, $degree, $major, $year, $credits, $role){
+    public function addUser($username, $full_name, $email, $password, $university, $major, $role){
         $user = new SBUser();
         $user->username = $username;
         $user->full_name = $full_name;
         $user->email = $email;
         $user->password = md5($password);
-        $user->institution = $institution;
-        $user->degree = $degree;
+        $user->university = $university;
         $user->major = $major;
-        $user->year = $year;
-        $user->credits = $credits;
         $user->role = $role;
         $user->save();
     }
 
-    public function addCourse($name, $professor_id, $institution, $major, $year){
+    public function addCourse($name, $professor_id, $university, $major){
         $course = new Course();
         $course->name = $name;
         $course->professor_id = $professor_id;
-        $course->institution = $institution;
+        $course->university = $university;
         $course->major = $major;
-        $course->year = $year;
         $course->save();
     }
 

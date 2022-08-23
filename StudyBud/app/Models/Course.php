@@ -9,8 +9,9 @@ class Course extends Model
 {
     use HasFactory;
     protected $table = 'courses';
-    protected $fillable = ['name','professor_id','institution','major','year'];
+    protected $fillable = ['name','professor_id','institution','major'];
     protected $primaryKey = 'course_id';
+    public $timestamps = false;
 
     // $course -> professor
     public function professor()

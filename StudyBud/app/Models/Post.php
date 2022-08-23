@@ -11,6 +11,7 @@ class Post extends Model
     protected $table = 'posts';
     protected $fillable = ['user_id', 'course_id', 'content'];
     protected $primaryKey = 'post_id';
+    public $timestamps = false;
 
     public function user() //restituisce oggetto di tipo author
     {
