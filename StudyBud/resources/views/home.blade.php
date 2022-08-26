@@ -1,10 +1,9 @@
 @extends('layouts.logged')
 
-<title>Corso</title>
+<title>Home</title>
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ route('index') }}" class="orange-link">Home</a></li>
-<li class="breadcrumb-item active" aria-current="page">{{ $course->name }}</li>
 @endsection
 
 @section('content')
@@ -47,17 +46,21 @@
     <!-- POST FEED -->
     <div class="col" style="margin-bottom: 8%;">
         <div class="card" style="padding: 5%;">
-            <h1 style="color: #30475E;">{{$course->name}}</h1>
+            @if(count($courseList)!=0)
             <!-- NEW POST -->
-            <form action="{{ route('post.course', ['course'=>$course->course_id]) }}" method="post">
+            <form action="{{ route('post') }}" method="post">
                 @csrf
-                <div class="input-group" style="margin-top:30px;">
+                <div class="input-group">
                     <input type="text" name="content" class="form-control" placeholder="Write a post...">
+                    <select id="course" name="course">
+                        @foreach($courseList as $course)
+                        <option value="{{ $course->course_id }}">{{ $course->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
-                <Input type="submit" value="Post" class="btn btn-primary post-button btn btn-lg login">
+                <input type="submit" value="Post" class="btn btn-primary post-button btn btn-lg login">
             </form>
             <!-- END NEW POST -->
-
             @if(count($postList)!=0)
             @foreach($postList as $post)
             <div class="card post-body" @if($post->user->role == 'Professor')style="background:#fcf8d9;"@endif>
@@ -94,6 +97,15 @@
                 <div class="card-body">
                     <h2 style="color:#f2a365; text-align:center; margin-top:20px">Sembra che nessuno abbia ancora scritto un post!</h2>
                     <h4 style="color:rgba(34, 40, 49, 0.85); text-align:center; margin-top:30px;">Scrivi un nuovo post nel campo sopra</h4>
+                </div>
+            </div>
+            @endif
+            @else
+            <div class="card post-body">
+                <div class="card-body">
+                    <h2 style="color:#f2a365; text-align:center; margin-top:20px">Sembra che tu non sia iscritto a nessun corso!</h2>
+                    <h4 style="color:rgba(34, 40, 49, 0.85); text-align:center; margin-top:30px;">Iscriviti ai corsi che segui per iniziare a vedere i post</h4>
+                    <a href="{{ route('course.index') }}" style="text-decoration:none"><button class="btn btn-primary post-button btn btn-lg login" style="width:40%;margin-top:40px;min-height:50px">Scopri i corsi disponibili</button></a>
                 </div>
             </div>
             @endif

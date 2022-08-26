@@ -4,7 +4,7 @@
 
 @section('content')
 
-                <form class="logbox" action="{{ route('user.login') }}" method="post">
+                <form class="logbox" action="{{ route('user.login') }}" method="post" style="margin-top:-20%;">
                     @csrf
                     <h1 style="color: white">LOGIN</h1>
                     <p class="text-muted">Inserisci il tuo username e la tua password</p>

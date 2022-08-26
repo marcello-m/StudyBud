@@ -13,19 +13,69 @@ class DataLayer extends Model
 {
     use HasFactory;
 
-    public function listPosts($user){
-        $posts = Post::where('user_id'.$user)->get();
+    public function listPostsByUserId($user){
+        $posts = Post::where('user_id'.$user)->orderBy('post_id','desc')->get();
         return $posts;
     }
 
-    public function listCourses($user){
-        $courses = Course::where('professor_id'.$user)->get();
+    public function listPostsByCourseId($courseId){
+        $posts = Post::where('course_id', $courseId)->orderBy('post_id','desc')->get();
+        return $posts;
+    }
+
+    public function listAllPosts(){
+        $posts = Post::orderBy('post_id','desc')->get();
+        return $posts;
+    }
+
+    public function listCourses($userID){
+        $courses = Course::where('professor_id',$userID)->get();
         return $courses;
     }
 
+    public function listAllCourses(){
+        $courses = Course::all();
+        return $courses;
+    }
+
+    public function listCoursesByUserId($userID){
+        $courses = SBUser::find($userID)->courses;
+        return $courses;
+    }
+
+    public function listCoursesAvailableByUserId($userID){
+        $uni = SBUser::find($userID)->uni_id;
+        $courses = Course::whereNotIn('course_id', function($query) use ($userID){
+            $query->select('course_id')->from('courses_sb_users')->where('user_id', $userID);
+        })->where('uni_id', $uni)->get();
+        return $courses;
+    }
+
+    public function listPostByEnrolledCourses($userID){
+        $posts = Post::whereIn('course_id', function($query) use ($userID){
+            $query->select('course_id')->from('courses_sb_users')->where('user_id', $userID);
+        })->orderBy('post_id','desc')->get();
+        return $posts;
+    }
+
     public function listUsers($course){
-        $users = Course::where('course_id'.$course)->get();
+        $users = Course::where('course_id',$course)->get();
         return $users;
+    }
+
+    public function listUniversities(){
+        $universities = University::all();
+        return $universities;
+    }
+
+    public function listCoursesByUniversity($university){
+        $courses = Course::where('university_id',$university)->get();
+        return $courses;
+    }
+
+    public function listCommentsByPostId($postId){
+        $comments = Comment::where('post_id',$postId)->orderBy('comment_id','asc')->get();
+        return $comments;
     }
 
     public function findUserById($id){
@@ -58,19 +108,28 @@ class DataLayer extends Model
         return $post;
     }
 
-    public function deleteUserById($id){
+    public function findUniversityById($id){
+        $university = University::find($id);
+        return $university;
+    }
+
+    public function deleteUser($id){
         $user = SBUser::find($id);
         $user->delete();
     }
 
-    public function deleteCourseById($id){
+    public function deleteCourse($id){
         $course = Course::find($id);
         $course->delete();
     }
 
-    public function deletePostById($id){
+    public function deletePost($id){
         $post = Post::find($id);
         $post->delete();
+    }
+
+    public function deleteUserPostsinCourse($id, $course){
+        $post = Post::where('course_id', $course)->where('user_id', $id)->delete();
     }
 
     public function editUser($id, $username, $full_name, $email, $password, $institution, $major, $role){
@@ -85,12 +144,9 @@ class DataLayer extends Model
         $user->save();
     }
 
-    public function editCourse($id, $name, $professor_id, $university, $major){
+    public function editCourse($id, $name){
         $course = Course::find($id);
         $course->name = $name;
-        $course->professor_id = $professor_id;
-        $course->university = $university;
-        $course->major = $major;
         $course->save();
     }
 
@@ -114,12 +170,11 @@ class DataLayer extends Model
         $user->save();
     }
 
-    public function addCourse($name, $professor_id, $university, $major){
+    public function addCourse($name, $professor_id, $uni_id){
         $course = new Course();
         $course->name = $name;
         $course->professor_id = $professor_id;
-        $course->university = $university;
-        $course->major = $major;
+        $course->uni_id = $uni_id;
         $course->save();
     }
 
@@ -131,6 +186,20 @@ class DataLayer extends Model
         $post->save();
     }
 
+    public function addUniversity($name){
+        $university = new University();
+        $university->name = $name;
+        $university->save();
+    }
+
+    public function addComment($user_id, $post_id, $content){
+        $comment = new Comment();
+        $comment->user_id = $user_id;
+        $comment->post_id = $post_id;
+        $comment->content = $content;
+        $comment->save();
+    }
+
     // validazione utente
     public function validateUser($username, $password){
         $user = SBUser::where('username', $username)->get(['password']);
@@ -139,5 +208,26 @@ class DataLayer extends Model
         } else {
             return (md5($password) == ($user[0]->password));
         }
+    }
+
+    public function addUserToCourse($userID, $courseID){
+        $course = Course::find($courseID);
+        $course->users()->attach($userID);
+    }
+
+    public function removeUserFromCourse($userID, $courseID){
+        $course = Course::find($courseID);
+        $course->users()->detach($userID);
+
+    }
+
+    public function getUserID($username){
+        $id = SBUser::where('username', $username)->get(['user_id']);
+        return $id[0]->user_id;
+    }
+
+    public function getCourseId($name){
+        $id = Course::where('name', $name)->get(['course_id']);
+        return $id[0]->course_id;
     }
 }

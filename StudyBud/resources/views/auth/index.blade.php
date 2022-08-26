@@ -12,7 +12,7 @@
           <h1 style="font-size: 80px">Study<span style="color:#f2a365">Bud</span></h1>
           <h5 class="mb-4">Il miglior portale per le comunità studentesche</h5>
           <a class="login btn btn-lg m-2" href="{{ route('user.login') }}" role="button">Login</a>
-          <a class="login btn btn-lg m-2" href="{{ route('user.register') }}" role="button">Registrati</a>
+          <a class="login btn btn-lg m-2" href="{{ route('user.register') }}" role="button">Register</a>
         </div>
       </div>
     </div>
