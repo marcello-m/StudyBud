@@ -31,7 +31,8 @@
 }
 
 .campi:focus {
-    border-color: #f2a365
+    border-color: #f2a365;
+    width:270px;
 }
 
 .login {

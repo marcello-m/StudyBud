@@ -17,7 +17,8 @@ class FrontController extends Controller
             $post_list = $dl->listPostByEnrolledCourses($userID);
             $user = $dl->findUserById($userID);
             $course_list = $dl->listCoursesByUserId($userID);
-            return view('home')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('postList', $post_list)->with('courseList', $course_list)->with('user', $user);
+            $uni = $dl->findUniversityById($user->uni_id);
+            return view('home')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('postList', $post_list)->with('courseList', $course_list)->with('user', $user)->with('uni', $uni);
         } else {
             return view('auth/index')->with('logged', false);
         }

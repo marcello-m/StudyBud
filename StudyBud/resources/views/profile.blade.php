@@ -1,10 +1,10 @@
 @extends('layouts.logged')
 
-<title>Profilo</title>
+<title>{{ trans('labels.profile') }} - {{ $user->username }}</title>
 
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{ route('index') }}" class="orange-link">Home</a></li>
-<li class="breadcrumb-item active" aria-current="page">Profilo</li>
+<li class="breadcrumb-item"><a href="{{ route('index') }}" class="orange-link">{{ trans('labels.home') }}</a></li>
+<li class="breadcrumb-item active" aria-current="page">{{ trans('labels.profile') }}</li>
 @endsection
 
 @section('content')
@@ -25,7 +25,7 @@
                     <hr style="margin-left:6%; margin-right:6%;">
                 </div>
                 <div class="card-body">
-                    <p style="font-weight: 600; text-align: center;">CORSI ATTIVI</p>
+                    <p style="font-weight: 600; text-align: center; text-transform:uppercase;">{{ trans('labels.activeCourses') }}</p>
                     @foreach($enrolledCoursesList as $coursePanel)
                     <div class="card" style="margin-bottom:20px;">
                         <div class="card-body">
@@ -33,11 +33,11 @@
                                 <h5 class="card-title">{{ $coursePanel->name }}</h5>
                             </a>
                             <br>
-                            <a href="{{ route('course.show',['course'=>$coursePanel->course_id]) }}" class="menuhome orange-link course-card-link">Accedi al corso</a>
+                            <a href="{{ route('course.show',['course'=>$coursePanel->course_id]) }}" class="menuhome orange-link course-card-link">{{ trans('labels.accessCourse') }}</a>
                         </div>
                     </div>
                     @endforeach
-                    <a href="{{ route('course.index') }}" style="text-decoration:none"><button class="btn btn-primary post-button btn btn-lg login" style="width:40%;margin-top:20px;min-height:50px">Gestisci i corsi</button></a>
+                    <a href="{{ route('course.index') }}" style="text-decoration:none"><button class="btn btn-primary post-button btn btn-lg login" style="width:40%;margin-top:20px;min-height:50px">{{ trans('labels.manageCourses') }}</button></a>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
             <div class="card-body" style="margin-top:2%;">
                 <div class="row">
                     <div class="col-sm-3">
-                        <h6 class="mb-0">User</h6>
+                        <h6 class="mb-0">{{ trans('labels.username') }}</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         {{ $user->username }}
@@ -61,7 +61,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-3">
-                        <h6 class="mb-0">Name</h6>
+                        <h6 class="mb-0">{{ trans('labels.name') }}</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         {{ $user->full_name }}
@@ -70,7 +70,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-3">
-                        <h6 class="mb-0">Email</h6>
+                        <h6 class="mb-0">{{ trans('labels.email') }}</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         {{ $user->email }}
@@ -79,7 +79,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-3">
-                        <h6 class="mb-0">University</h6>
+                        <h6 class="mb-0">{{ trans('labels.uni') }}</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         {{ $uni->name }}
@@ -88,7 +88,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-3">
-                        <h6 class="mb-0">Major</h6>
+                        <h6 class="mb-0">{{ trans('labels.major') }}</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         {{ $user->major }}
@@ -97,11 +97,11 @@
                 @if($user->user_id == $loggedUser->user_id)
                 <hr>
                 <a href="{{ route('user.edit',['userId'=>$user->user_id]) }}" style="text-decoration: none;">
-                    <button type="submit" class="btn btn-primary post-button btn btn-lg login" style="align-content:center; min-width:120px;">
+                    <button type="submit" class="btn btn-primary post-button btn btn-lg login" style="align-content:center; min-width:120px; height:40px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                        </svg><span style="padding: 6%;">Edit profile</span>
+                        </svg><span style="padding: 6%;">{{ trans('labels.editProfile') }}</span>
                     </button>
                 </a>
                 @else
@@ -117,9 +117,9 @@
 
             <div class="card" style="margin-bottom:30px; border:0;">
                 @if($user->user_id == $loggedUser->user_id)
-                <h4>I miei post</h4>
+                <h4>{{ trans('labels.myPosts') }}</h4>
                 @else
-                <h4>I post di {{ $user->username }}</h4>
+                <h4>{{ trans('labels.usersPosts') }} {{ $user->username }}</h4>
                 @endif
             </div>
             @if(count($enrolledCoursesList)!=0)
@@ -129,7 +129,7 @@
                 <div class="card-body">
                     <img src="{{url('/')}}/img/profile.png" class="rounded-circle post-image" />
                     <a href="{{ route('user.show', [$post->user_id]) }}" class="post-name">{{ $post->user->username }}</a>
-                    in
+                    {{ trans('labels.in') }}
                     <a href="{{ route('course.show',['course'=>$post->course_id]) }}" class="mb-3 text-muted post-course-link">{{ $post->course->name }}</a>
                     <p class="card-text" style="margin-top: 3%;">{{ $post->content }}</p>
                     <button class="btn btn-primary btn btn-lg login post-comment-btn" style="width: 22pt;">
@@ -148,7 +148,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-dots" viewBox="0 0 16 16">
                                 <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
                                 <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                            </svg> Comment ({{ count($post->comments) }})
+                            </svg> {{ trans('labels.comments') }} ({{ count($post->comments) }})
                         </button>
                     </a>
                     @if($user->user_id == $loggedUser->user_id or ($user->role=='Student' and $loggedUser->role=='Professor' and $post->course->professor_id==$loggedUser->user_id))
@@ -157,7 +157,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style="margin-right:5px;">
                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
                                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                            </svg> Delete post
+                            </svg> {{ trans('labels.deletePost') }}
                         </button>
                     </a>
                     @endif
@@ -168,10 +168,10 @@
             <div class="card post-body">
                 <div class="card-body">
                     @if($user->user_id == $loggedUser->user_id)
-                    <h2 style="color:#f2a365; text-align:center; margin-top:20px">Non hai ancora scritto un post!</h2>
-                    <h4 style="color:rgba(34, 40, 49, 0.85); text-align:center; margin-top:30px;">Vai nella home o nella pagina di un corso per scrivere il tuo primo post</h4>
+                    <h2 style="color:#f2a365; text-align:center; margin-top:20px">{{ trans('labels.noPostsMyProfile') }}</h2>
+                    <h4 style="color:rgba(34, 40, 49, 0.85); text-align:center; margin-top:30px;">{{ trans('labels.noPostsMyProfileSubtitle') }}</h4>
                     @else
-                    <h2 style="color:#f2a365; text-align:center; margin-top:20px">{{ $user->username }} non ha ancora scritto un post!</h2>
+                    <h2 style="color:#f2a365; text-align:center; margin-top:20px">{{ $user->username }} {{ trans('labels.noPostsUser') }}</h2>
                     @endif
                 </div>
             </div>
@@ -180,11 +180,11 @@
             <div class="card post-body">
                 <div class="card-body">
                     @if($user->user_id == $loggedUser->user_id)
-                    <h2 style="color:#f2a365; text-align:center; margin-top:20px">Sembra che tu non sia iscritto a nessun corso!</h2>
-                    <h4 style="color:rgba(34, 40, 49, 0.85); text-align:center; margin-top:30px;">Iscriviti ai corsi che segui per iniziare a vedere i post</h4>
-                    <a href="{{ route('course.index') }}" style="text-decoration:none"><button class="btn btn-primary post-button btn btn-lg login" style="width:40%;margin-top:40px;min-height:50px">Scopri i corsi disponibili</button></a>
+                    <h2 style="color:#f2a365; text-align:center; margin-top:20px">{{ trans('labels.noCourses') }}</h2>
+                    <h4 style="color:rgba(34, 40, 49, 0.85); text-align:center; margin-top:30px;">{{ trans('labels.noCoursesSubtitle') }}</h4>
+                    <a href="{{ route('course.index') }}" style="text-decoration:none"><button class="btn btn-primary post-button btn btn-lg login" style="width:40%;margin-top:40px;min-height:50px">{{ trans('labels.discoverAvailableCourses') }}</button></a>
                     @else
-                    <h2 style="color:#f2a365; text-align:center; margin-top:20px">{{ $user->username }} non è iscritto a nessun corso!</h2>
+                    <h2 style="color:#f2a365; text-align:center; margin-top:20px">{{ $user->username }} {{ trans('labels.isNotEnrolled') }}</h2>
                     @endif
                 </div>
             </div>

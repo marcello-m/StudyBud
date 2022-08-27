@@ -13,7 +13,9 @@ class AuthController extends Controller
     }
 
     public function register(){
-        return view('auth.register');
+        $dl = new DataLayer();
+        $uni = $dl->listUniversities();
+        return view('auth.register')->with('uniList', $uni);
     }
 
     public function login(Request $request){
@@ -37,8 +39,8 @@ class AuthController extends Controller
     public function registration(Request $request){
         $dl = new DataLayer();
 
-        $dl->addUser($request->input('username'),$request->input('full_name'),$request->input('email'),$request->input('password'),$request->input('university'),$request->input('major'),$request->input('role'));
+        $dl->addUser($request->input('username'),$request->input('full_name'),$request->input('email'),$request->input('password'),$request->input('uni_id'),$request->input('major'),$request->input('role'));
 
-        return Redirect::to('user.login');
+        return Redirect::to('/');
     }
 }

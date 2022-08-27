@@ -132,6 +132,15 @@ class DataLayer extends Model
         $post = Post::where('course_id', $course)->where('user_id', $id)->delete();
     }
 
+    public function deleteUserCommentsInCourse($id, $course){
+        $commentedPosts = Comment::where('user_id', $id)->get();
+        foreach($commentedPosts as $post){
+            if($post->post->course_id == $course){
+                $post->delete();
+            }
+        }
+    }
+
     public function deleteComment($id){
         $comment = Comment::find($id);
         $comment->delete();
@@ -168,13 +177,13 @@ class DataLayer extends Model
         $post->save();
     }
 
-    public function addUser($username, $full_name, $email, $password, $university, $major, $role){
+    public function addUser($username, $full_name, $email, $password, $uni, $major, $role){
         $user = new SBUser();
         $user->username = $username;
         $user->full_name = $full_name;
         $user->email = $email;
         $user->password = md5($password);
-        $user->university = $university;
+        $user->uni_id = $uni;
         $user->major = $major;
         $user->role = $role;
         $user->save();
@@ -241,7 +250,7 @@ class DataLayer extends Model
         return $id[0]->course_id;
     }
 
-    public function checkIfUserIsInCourse($userID, $courseID){
+    public function isEnrolled($userID, $courseID){
         $course = Course::find($courseID);
         $users = $course->users()->get();
         foreach($users as $user){

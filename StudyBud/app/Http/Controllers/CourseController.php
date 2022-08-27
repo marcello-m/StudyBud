@@ -48,16 +48,14 @@ class CourseController extends Controller
         $course = $dl->findCourseById($courseId);
         $enrolled_course_list = $dl->listCoursesByUserId($userID);
         $available_course_list = $dl->listCoursesAvailableByUserId($userID);
-        if ($user->role == "Student") {
+        if ($user->role == "Student" and !$dl->isEnrolled($courseId, $userID)) {
             $dl->addUserToCourse($userID, $courseId);
-            $enrolled_course_list = $dl->listCoursesByUserId($userID);
-            $available_course_list = $dl->listCoursesAvailableByUserId($userID);
-            return view('manageCourses')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('enrolledCoursesList', $enrolled_course_list)->with('availableCoursesList', $available_course_list)->with('user', $user);
-        
-        } else {
+        } else if ($user->role == "Professor") {
             $dl->editCourse($courseId, $request->input('name'));
-            return view('manageCourses')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('enrolledCoursesList', $enrolled_course_list)->with('availableCoursesList', $available_course_list)->with('user', $user);
         }
+        $enrolled_course_list = $dl->listCoursesByUserId($userID);
+        $available_course_list = $dl->listCoursesAvailableByUserId($userID);
+        return view('manageCourses')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('enrolledCoursesList', $enrolled_course_list)->with('availableCoursesList', $available_course_list)->with('user', $user);
     }
 
     public function store(Request $request)
@@ -79,9 +77,10 @@ class CourseController extends Controller
         $dl = new DataLayer();
         $userID = $dl->getUserId($_SESSION['loggedName']);
         $user = $dl->findUserById($userID);
-        if($user->role == "Student"){
+        if ($user->role == "Student") {
             $dl->removeUserFromCourse($userID, $courseId);
             $dl->deleteUserPostsinCourse($userID, $courseId);
+            $dl->deleteUserCommentsInCourse($userID, $courseId);
             return view('manageCourses')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('enrolledCoursesList', $dl->listCoursesByUserId($userID))->with('availableCoursesList', $dl->listCoursesAvailableByUserId($userID))->with('user', $user);
         } else {
             $dl->deleteCourse($courseId);
@@ -98,8 +97,9 @@ class CourseController extends Controller
         $post_list = $dl->listPostsByCourseId($id);
         $course_list = $dl->listCoursesByUserId($userID);
         $professor = $dl->findUserById($course->professor_id);
-        if($dl->checkIfUserIsInCourse($userID, $id)){
-            return view('course')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('postList', $post_list)->with('courseList', $course_list)->with('user', $user)->with('course', $course)->with('professor', $professor);
+        $uni = $dl->findUniversityById($user->uni_id);
+        if ($dl->isEnrolled($userID, $id)) {
+            return view('course')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('postList', $post_list)->with('courseList', $course_list)->with('user', $user)->with('course', $course)->with('professor', $professor)->with('uni', $uni);
         } else {
             return "Voleeeevi";
         }

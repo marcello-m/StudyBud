@@ -19,6 +19,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Route::middleware('lang')->group(function () {
 Route::get('/user/login', [AuthController::class, 'authentication'])->name('user.login');
 Route::post('/user/login', [AuthController::class, 'login'])->name('user.login');
 Route::get('/user/register', [AuthController::class, 'register'])->name('user.register');
@@ -26,6 +27,7 @@ Route::post('/user/register', [AuthController::class, 'registration'])->name('us
 Route::get('/user/logout', [AuthController::class, 'logout'])->name('user.logout');
 
 Route::get('/', [FrontController::class, 'getHome'])->middleware('lang')->name('index');
+});
 
 Route::middleware('auth.custom', 'lang')->group(function () {
     Route::post('/', [PostController::class, 'post'])->name('post');
