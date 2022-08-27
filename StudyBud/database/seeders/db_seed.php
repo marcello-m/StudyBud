@@ -19,6 +19,7 @@ class db_seed extends Seeder
      */
     public function run()
     {
+        /*
         SBUser::create(['username'=>'m.manenti',
         'full_name'=>'Marcello Manenti',
         'email'=>'m.manenti016@studenti.unibs.it',
@@ -58,7 +59,7 @@ class db_seed extends Seeder
         'uni_id'=>1,
         'major'=>'Informatica',
         'role'=>'Professor']);
-
+        */
         $dl = new DataLayer();
         $userMarcello = $dl->getUserID('m.manenti');
         $userAlessandro = $dl->getUserID('a.bettinzana');
@@ -66,7 +67,7 @@ class db_seed extends Seeder
         $userMatteo = $dl->getUserID('matteom');
         $userBill = $dl->getUserID('b.gates');
 
-        Course::factory()->count(5)->create(['user_id'=>$userBill]);
+        Course::factory()->count(5)->create(['professor_id'=>$userBill, 'uni_id'=>$userBill->uni_id]);
         $courses_list = json_decode($dl->listCourses($userBill));
     }
 }

@@ -132,6 +132,11 @@ class DataLayer extends Model
         $post = Post::where('course_id', $course)->where('user_id', $id)->delete();
     }
 
+    public function deleteComment($id){
+        $comment = Comment::find($id);
+        $comment->delete();
+    }
+
     public function editUser($id, $username, $full_name, $email, $password, $institution, $major, $role){
         $user = SBUser::find($id);
         $user->username = $username;

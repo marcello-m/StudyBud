@@ -43,4 +43,18 @@ class PostController extends Controller
         $dl->addComment($userId, $postId, $request->input('content'));
         return Redirect::to('/post/' . $postId);
     }
+
+    public function destroy($postId)
+    {
+        $dl = new DataLayer();
+        $dl->deletePost($postId);
+        return Redirect::to('/');
+    }
+
+    public function destroyComment($postId, $commentId)
+    {
+        $dl = new DataLayer();
+        $dl->deleteComment($commentId);
+        return Redirect::to('/post/' . $postId);
+    }
 }

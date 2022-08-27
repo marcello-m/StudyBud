@@ -86,7 +86,7 @@ class CourseController extends Controller
             return view('manageCourses')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('enrolledCoursesList', $dl->listCoursesByUserId($userID))->with('availableCoursesList', $dl->listCoursesAvailableByUserId($userID))->with('user', $user);
         } else {
             $dl->deleteCourse($courseId);
-            return view('manageCourses')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('enrolledCoursesList', $dl->listCoursesByUserId($userID))->with('availableCoursesList', $dl->listCoursesAvaiulableByUserId($userID))->with('user', $user);
+            return view('manageCourses')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('enrolledCoursesList', $dl->listCoursesByUserId($userID))->with('availableCoursesList', $dl->listCoursesAvailableByUserId($userID))->with('user', $user);
         }
     }
 

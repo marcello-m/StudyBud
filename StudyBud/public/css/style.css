@@ -133,6 +133,7 @@
     background-color: #7ebaf546;
     border-color: #30475E;
     width: 30%;
+    max-width: 150px;
     padding: 0.5%;
     display: inline-block;
 }
@@ -162,6 +163,24 @@
 }
 
 .discard-edit-btn:hover{
+    color: white;
+    background-color: #aa3b3b;
+    border-color: #aa3b3b;
+}
+
+.post-delete-btn{
+    font-size: 80%;
+    font-weight: 500;
+    color: #aa3b3b;
+    background-color: #af4c4c63;
+    border-color: #aa3b3b;
+    width: 30%;
+    max-width: 150px;
+    padding: 0.5%;
+    display: inline-block;
+}
+
+.post-delete-btn:hover{
     color: white;
     background-color: #aa3b3b;
     border-color: #aa3b3b;
