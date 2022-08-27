@@ -79,7 +79,6 @@ class CourseController extends Controller
         $dl = new DataLayer();
         $userID = $dl->getUserId($_SESSION['loggedName']);
         $user = $dl->findUserById($userID);
-        $course = $dl->findCourseById($courseId);
         if($user->role == "Student"){
             $dl->removeUserFromCourse($userID, $courseId);
             $dl->deleteUserPostsinCourse($userID, $courseId);

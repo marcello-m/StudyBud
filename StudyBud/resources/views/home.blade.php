@@ -89,7 +89,7 @@
                             </svg> Comment ({{ count($post->comments) }})
                         </button>
                     </a>
-                    @if($post->user_id == $user->user_id)
+                    @if($post->user_id == $user->user_id or ($user->role == 'Professor' and $post->course->professor_id == $user->user_id))
                     <a href="{{ route('post.destroy',['postId'=>$post->post_id]) }}">
                         <button type="button" class="btn btn-primary btn btn-lg login post-delete-btn" style="margin-left: 5%;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style="margin-right:5px;">

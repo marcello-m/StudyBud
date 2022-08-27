@@ -4,7 +4,7 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ route('index') }}" class="orange-link">Home</a></li>
-<li class="breadcrumb-item active" aria-current="page">Post di {{ $user->username }} in {{ $course->name }}</li>
+<li class="breadcrumb-item active" aria-current="page">Post di {{ $post->user->username }} in {{ $course->name }}</li>
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
     <div class="card post-body">
         <div class="card-body">
             <img src="{{url('/')}}/img/profile.png" class="rounded-circle post-image" />
-            <a href="#" class="post-name">{{ $user->username }}</a>
+            <a href="#" class="post-name">{{ $post->user->username }}</a>
             in
             <a href="#" class="mb-3 text-muted post-course-link">Nome Corso</a>
             <p class="card-text" style="margin-top: 3%;">{{ $post->content }}</p>
@@ -55,7 +55,7 @@
                                             <span class="text-muted" style="font-weight:400;"><i>(autore del post)</i></span>
                                             @endif
                                         </p>
-                                        @if($comment->user_id == $user->user_id)
+                                        @if($comment->user_id == $user->user_id or $user->role == 'Professor' or $post->user_id == $user->user_id)
                                         <a href="{{ route('post.comment.destroy',['postId'=>$post->post_id, 'commentId'=>$comment->comment_id]) }}" style="text-decoration:none; color:red; font-weight: 300;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style="margin-right:5px;">
                                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />

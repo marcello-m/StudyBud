@@ -30,7 +30,8 @@ class PostController extends Controller
     {
         $dl = new DataLayer();
         $post = $dl->findPostById($postId);
-        $user = $dl->findUserById($post->user_id);
+        $userId = $dl->getUserId($_SESSION['loggedName']);
+        $user = $dl->findUserById($userId);
         $course = $dl->findCourseById($post->course_id);
         $comments = $dl->listCommentsByPostId($postId);
         return view('post')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('post', $post)->with('user', $user)->with('course', $course)->with('commentsList', $comments);
