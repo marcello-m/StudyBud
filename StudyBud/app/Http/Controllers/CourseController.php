@@ -97,6 +97,11 @@ class CourseController extends Controller
         $course = $dl->findCourseById($id);
         $post_list = $dl->listPostsByCourseId($id);
         $course_list = $dl->listCoursesByUserId($userID);
-        return view('course')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('postList', $post_list)->with('courseList', $course_list)->with('user', $user)->with('course', $course);
+        $professor = $dl->findUserById($course->professor_id);
+        if($dl->checkIfUserIsInCourse($userID, $id)){
+            return view('course')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('postList', $post_list)->with('courseList', $course_list)->with('user', $user)->with('course', $course)->with('professor', $professor);
+        } else {
+            return "Voleeeevi";
+        }
     }
 }

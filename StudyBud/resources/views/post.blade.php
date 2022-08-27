@@ -13,7 +13,7 @@
     <div class="card post-body">
         <div class="card-body">
             <img src="{{url('/')}}/img/profile.png" class="rounded-circle post-image" />
-            <a href="#" class="post-name">{{ $post->user->username }}</a>
+            <a href="{{ route('user.show', [$post->user->user_id]) }}" class="post-name">{{ $post->user->username }}</a>
             in
             <a href="#" class="mb-3 text-muted post-course-link">Nome Corso</a>
             <p class="card-text" style="margin-top: 3%;">{{ $post->content }}</p>
@@ -30,6 +30,16 @@
                 </svg>
             </button>
             <!-- Fine bottoni upvote/downvote -->
+            @if($post->user_id == $user->user_id or ($user->role == 'Professor' and $post->course->professor_id == $user->user_id))
+            <a href="{{ route('post.destroy',['postId'=>$post->post_id]) }}">
+                <button type="button" class="btn btn-primary btn btn-lg login post-delete-btn" style="margin-left: 5%;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style="margin-right:5px;">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                    </svg> Delete post
+                </button>
+            </a>
+            @endif
         </div>
     </div>
 </div>
@@ -50,17 +60,17 @@
                                 <div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <p class="mb-1" style="font-weight: 600;">
-                                            {{ $comment->user->username }}
+                                            <a href="{{ route('user.show', [$comment->user_id]) }}" style="text-decoration:none; color:black;">{{ $comment->user->username }}</a>
                                             @if($comment->user_id==$post->user_id)
                                             <span class="text-muted" style="font-weight:400;"><i>(autore del post)</i></span>
                                             @endif
                                         </p>
                                         @if($comment->user_id == $user->user_id or $user->role == 'Professor' or $post->user_id == $user->user_id)
                                         <a href="{{ route('post.comment.destroy',['postId'=>$post->post_id, 'commentId'=>$comment->comment_id]) }}" style="text-decoration:none; color:red; font-weight: 300;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style="margin-right:5px;">
-                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                                </svg> Delete comment
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style="margin-right:5px;">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                            </svg> Delete comment
                                         </a>
                                         @endif
                                     </div>

@@ -14,13 +14,13 @@
             <div class="flex-column align-items-center text-center">
                 <img src="{{url('/')}}/img/profile.png" alt="Admin" class="rounded-circle" style="margin-top: 10%" width="150">
                 <div class="mt-4">
-                    <h4><a href="profile.php" style="text-decoration: none; color: #30475E;">{{ $user->full_name }}</a></h4>
+                    <h4><a href="{{ route('user.show', [$user->user_id]) }}" style="text-decoration: none; color: #30475E;">{{ $user->full_name }}</a></h4>
                     <h6 class="text-secondary">{{ $_SESSION['loggedName'] }}</h6>
                     <p class="text-secondary mb-1">{{ $user->role }}</p>
                     <p class="text-muted font-size-sm">{{ $user->university }}</p>
                 </div>
                 <div style="margin-bottom: 10%">
-                    <a href="profile.php" class="orange-link">Profilo</a>
+                    <a href="{{ route('user.show', [$user->user_id]) }}" class="orange-link">Profilo</a>
                 </div>
                 <hr style="margin-left:6%; margin-right:6%;">
             </div>
@@ -66,7 +66,7 @@
             <div class="card post-body" @if($post->user->role == 'Professor')style="background:#fcf8d9;"@endif>
                 <div class="card-body">
                     <img src="{{url('/')}}/img/profile.png" class="rounded-circle post-image" />
-                    <a href="#" class="post-name">{{ $post->user->full_name }}</a>
+                    <a href="{{ route('user.show', [$post->user_id]) }}" class="post-name">{{ $post->user->username }}</a>
                     in
                     <a href="{{ route('course.show',['course'=>$post->course_id]) }}" class="mb-3 text-muted post-course-link">{{ $post->course->name }}</a>
                     <p class="card-text" style="margin-top: 3%;">{{ $post->content }}</p>

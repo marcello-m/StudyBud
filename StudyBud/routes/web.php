@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,13 +30,19 @@ Route::get('/', [FrontController::class, 'getHome'])->middleware('lang')->name('
 Route::middleware('auth.custom', 'lang')->group(function () {
     Route::post('/', [PostController::class, 'post'])->name('post');
     Route::post('/course/{course}', [PostController::class, 'postInCourse'])->name('post.course');
+    
     Route::get('/post/{postId}', [PostController::class, 'show'])->name('post.show');
     Route::post('/post/{postId}/comment', [PostController::class, 'comment'])->name('post.comment');
     Route::get('post/{postId}/destroy', [PostController::class, 'destroy'])->name('post.destroy');
     Route::get('post/{postId}/comment/{commentId}/destroy', [PostController::class, 'destroyComment'])->name('post.comment.destroy');
+    
     Route::resource('/course', CourseController::class);
     Route::get('/course/{course}/destroy', [CourseController::class, 'destroy'])->name('course.destroy');
     Route::get('/course/{course}/update', [CourseController::class, 'update'])->name('course.update');
+
+    Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
+    Route::get('/user/{userId}/update', [UserController::class, 'update'])->name('user.update');
+    Route::get('/user/{userId}/edit', [UserController::class, 'edit'])->name('user.edit');
 });
 
 

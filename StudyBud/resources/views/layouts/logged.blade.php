@@ -37,10 +37,10 @@
                         <span style="color:grey;font-weight:600">{{ $loggedName }}</span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="home.html">Home</a>
+                        <a class="nav-link" href="{{ route('index') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.php">Profilo</a>
+                        <a class="nav-link" href="{{ route('user.show', [$user->user_id]) }}">Profilo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('user.logout') }}" style="color:red;">Logout</a>

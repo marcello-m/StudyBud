@@ -14,7 +14,7 @@ class DataLayer extends Model
     use HasFactory;
 
     public function listPostsByUserId($user){
-        $posts = Post::where('user_id'.$user)->orderBy('post_id','desc')->get();
+        $posts = Post::where('user_id',$user)->orderBy('post_id','desc')->get();
         return $posts;
     }
 
@@ -137,15 +137,20 @@ class DataLayer extends Model
         $comment->delete();
     }
 
-    public function editUser($id, $username, $full_name, $email, $password, $institution, $major, $role){
+    public function editUser($id, $username, $full_name, $email, $uni_id, $major){
         $user = SBUser::find($id);
         $user->username = $username;
         $user->full_name = $full_name;
         $user->email = $email;
-        $user->password = $password;
-        $user->institution = $institution;
+        $user->uni_id = $uni_id;
         $user->major = $major;
-        $user->role = $role;
+        $user->save();
+        $_SESSION['loggedName'] = $username;
+    }
+
+    public function editUserPassword($id, $password){
+        $user = SBUser::find($id);
+        $user->password = $password;
         $user->save();
     }
 
@@ -234,5 +239,23 @@ class DataLayer extends Model
     public function getCourseId($name){
         $id = Course::where('name', $name)->get(['course_id']);
         return $id[0]->course_id;
+    }
+
+    public function checkIfUserIsInCourse($userID, $courseID){
+        $course = Course::find($courseID);
+        $users = $course->users()->get();
+        foreach($users as $user){
+            if($user->user_id == $userID){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function removeUserFromAllCourses($userID){
+        $courses = Course::all();
+        foreach($courses as $course){
+            $course->users()->detach($userID);
+        }
     }
 }
