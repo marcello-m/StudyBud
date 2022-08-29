@@ -21,6 +21,24 @@ class DataLayer extends Model
         return $posts;
     }
 
+    public function listPostsByUserIdAndEnrollment($user, $loggedUser)
+    {
+        // get post list by user id and remove posts that are not enrolled by logged user
+        $posts = Post::where('user_id', $user)->orderBy('post_id', 'desc')->get();
+        $enrolled_course_list = $this->listCoursesByUserId($loggedUser);
+        $enrolled_course_ids = array();
+        foreach ($enrolled_course_list as $course) {
+            array_push($enrolled_course_ids, $course->course_id);
+        }
+        $filtered_posts = array();
+        foreach ($posts as $post) {
+            if (in_array($post->course_id, $enrolled_course_ids)) {
+                array_push($filtered_posts, $post);
+            }
+        }
+        return $filtered_posts;
+    }
+
     public function listPostsByCourseId($courseId)
     {
         $posts = Post::where('course_id', $courseId)->orderBy('post_id', 'desc')->get();

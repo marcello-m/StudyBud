@@ -18,7 +18,7 @@ class UserController extends Controller
         $loggedUser = $dl->findUserById($dl->getUserId($_SESSION['loggedName']));
         $uni = $dl->findUniversityById($user->uni_id);
         $enrolled_course_list = $dl->listCoursesByUserId($userId);
-        $postList = $dl->listPostsByUserId($userId);
+        $postList = $dl->listPostsByUserIdAndEnrollment($userId, $loggedUser->user_id);
         return view('profile')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('user', $user)->with('uni', $uni)->with('enrolledCoursesList', $enrolled_course_list)->with('loggedUser', $loggedUser)->with('postList', $postList);
     }
 
