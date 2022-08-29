@@ -15,7 +15,17 @@
         <div class="card h-100">
             <div>
                 <div class="d-flex flex-column align-items-center text-center" style="margin-top: 10%;">
-                    <img src="{{url('/')}}/img/profile.png" alt="Admin" class="rounded-circle" width="150">
+                    <img src="{{url('/')}}/img/profile/{{ $user->profile_picture }}" alt="Admin" class="rounded-circle" width="150" height="150">
+                    @if($user->user_id == $loggedUser->user_id)
+                    <a href="{{ route('user.edit.picture',['userId'=>$user->user_id]) }}" style="text-decoration: none;">
+                        <button type="submit" class="btn btn-primary post-button btn btn-lg login" style="align-content:center; min-width:200px; height:40px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-image" viewBox="0 0 16 16">
+                                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54A.505.505 0 0 1 1 12.5v-9a.5.5 0 0 1 .5-.5h13z" />
+                            </svg><span style="padding: 6%;">{{ trans('labels.editPicture') }}</span>
+                        </button>
+                    </a>
+                    @endif
                     <div class="mt-4">
                         <h4><a href="{{ route('user.show', [$user->user_id]) }}" style="text-decoration: none; color: #30475E;">{{ $user->full_name }}</a></h4>
                         <h6 class="text-secondary">{{ $user->username }}</h6>
@@ -97,11 +107,18 @@
                 @if($user->user_id == $loggedUser->user_id)
                 <hr>
                 <a href="{{ route('user.edit',['userId'=>$user->user_id]) }}" style="text-decoration: none;">
-                    <button type="submit" class="btn btn-primary post-button btn btn-lg login" style="align-content:center; min-width:120px; height:40px;">
+                    <button type="submit" class="btn btn-primary post-button btn btn-lg login" style="align-content:center; min-width:200px; height:40px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                         </svg><span style="padding: 6%;">{{ trans('labels.editProfile') }}</span>
+                    </button>
+                </a>
+                <a href="{{ route('user.edit.password',['userId'=>$user->user_id]) }}" style="text-decoration: none;">
+                    <button type="submit" class="btn btn-primary post-button btn btn-lg login" style="align-content:center; min-width:200px; height:40px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                        </svg><span style="padding: 3%;">{{ trans('labels.editPassword') }}</span>
                     </button>
                 </a>
                 @else
@@ -127,22 +144,11 @@
             @foreach($postList as $post)
             <div class="card post-body">
                 <div class="card-body">
-                    <img src="{{url('/')}}/img/profile.png" class="rounded-circle post-image" />
+                    <img src="{{url('/')}}/img/profile/{{ $post->user->profile_picture }}" class="rounded-circle post-image" />
                     <a href="{{ route('user.show', [$post->user_id]) }}" class="post-name">{{ $post->user->username }}</a>
                     {{ trans('labels.in') }}
                     <a href="{{ route('course.show',['course'=>$post->course_id]) }}" class="mb-3 text-muted post-course-link">{{ $post->course->name }}</a>
                     <p class="card-text" style="margin-top: 3%;">{{ $post->content }}</p>
-                    <button class="btn btn-primary btn btn-lg login post-comment-btn" style="width: 22pt;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
-                        </svg>
-                    </button>
-                    <span style="font-weight: 500; margin-inline: 1%;">0</span>
-                    <button class="btn btn-primary btn btn-lg login post-comment-btn" style="width: 22pt;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                        </svg>
-                    </button>
                     <a href="{{ route('post.show',['postId'=>$post->post_id]) }}" style="text-decoration:none;">
                         <button type="button" class="btn btn-primary btn btn-lg login post-comment-btn" style="margin-left: 5%;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-dots" viewBox="0 0 16 16">

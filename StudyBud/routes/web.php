@@ -27,6 +27,8 @@ Route::post('/user/register', [AuthController::class, 'registration'])->name('us
 Route::get('/user/logout', [AuthController::class, 'logout'])->name('user.logout');
 
 Route::get('/', [FrontController::class, 'getHome'])->middleware('lang')->name('index');
+
+Route::get('/ajaxRegister', [UserController::class, 'ajaxRegister'])->name('ajaxRegister');
 });
 
 Route::middleware('auth.custom', 'lang')->group(function () {
@@ -45,8 +47,14 @@ Route::middleware('auth.custom', 'lang')->group(function () {
     Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
     Route::get('/user/{userId}/update', [UserController::class, 'update'])->name('user.update');
     Route::get('/user/{userId}/edit', [UserController::class, 'edit'])->name('user.edit');
-});
+    Route::get('/user/{userId}/editPassword', [UserController::class, 'editPassword'])->name('user.edit.password');
+    Route::get('/user/{userId}/updatePassword', [UserController::class, 'updatePassword'])->name('user.update.password');
+    Route::get('/user/{userId}/editPicture', [UserController::class, 'editPicture'])->name('user.edit.picture');
+    Route::post('/user/{userId}/updatePicture', [UserController::class, 'updatePicture'])->name('user.update.picture');
 
+    Route::get('/ajaxCourse', [CourseController::class, 'ajaxCourseNameCheck'])->name('ajaxCourse');
+    Route::get('/ajaxUser', [UserController::class, 'ajaxUser'])->name('ajaxUser');
+});
 
 /*
 resource routes:

@@ -125,6 +125,7 @@
 .post-image{
     margin-right: 3%;
     width: 50;
+    height: 50;
 }
 
 .post-comment-btn{
@@ -185,4 +186,11 @@
     color: white;
     background-color: #aa3b3b;
     border-color: #aa3b3b;
+}
+
+.invalid-field-message{
+    color:red;
+    font-size: 80%;
+    font-weight: 700;
+    margin-left:10px;
 }

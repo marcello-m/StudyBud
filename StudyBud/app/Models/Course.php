@@ -13,12 +13,6 @@ class Course extends Model
     protected $primaryKey = 'course_id';
     public $timestamps = false;
 
-    // $course -> professor
-    public function professor()
-    {
-        return $this->belongsTo('App\Models\SBUser', 'professor_id');
-    }
-
     // $course -> posts
     public function posts()
     {

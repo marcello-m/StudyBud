@@ -23,14 +23,14 @@ class SBUser extends Model
         return $this->hasMany('App\Models\Comment', 'user_id');
     }
 
-    public function course() 
-    {
-        return $this->hasOne('App\Models\Course', 'user_id');
-    }
-
     public function courses()
     {
         return $this->belongsToMany('App\Models\Course', 'courses_sb_users', 'user_id', 'course_id');
         // 'nome tabella pivot', 'id user nella tabella pivot', 'id course nella tabella pivot'
+    }
+
+    public function universities()
+    {
+        return $this->belongsTo('App\Models\University', 'uni_id');
     }
 }

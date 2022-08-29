@@ -26,7 +26,9 @@ return[
     'home' => 'Home',
     'logout' => 'Logout',
     'profile' => 'Profile',
-    'professore' => 'Professor',
+    'all' => 'All',
+    'onlyProf' => 'Only professors',
+    'showPosts' => 'Show posts',
     //courses
     'activeCourses' => 'Active courses',
     'accessCourse' => 'Access course',
@@ -77,4 +79,15 @@ return[
     'noPostsMyProfile' => 'It seems you have not written any post yet!',
     'noPostsMyProfileSubtitle' => 'Go to the home page or a course page to write your first post',
     'noPostsUser' => ' has not written any post yet!',
+    'editPassword' => 'Edit password',
+    'oldPassword' => 'Old password',
+    'newPassword' => 'New password',
+    'password' => 'Password',
+    'passwordConfirmation' => 'Confirm new password',
+    'passwordUpdateWarning' => 'WARNING: the password update will cause the user to logout',
+    'editPicture' => 'Edit picture',
+    'picture' => 'Picture',
+    'removePicture' => 'Remove picture',
+    //error messages js
+    'courseNameNotEmpty' => 'The course name must not be empty',
 ];

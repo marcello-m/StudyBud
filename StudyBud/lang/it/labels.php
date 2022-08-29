@@ -26,7 +26,9 @@ return[
     'home' => 'Home',
     'logout' => 'Esci',
     'profile' => 'Profilo',
-    'professore' => 'Professore',
+    'all' => 'Tutti',
+    'onlyProf' => 'Solo Professori',
+    'showPosts' => 'Mostra i post',
     //courses
     'activeCourses' => 'Corsi attivi',
     'accessCourse' => 'Accedi al corso',
@@ -77,4 +79,15 @@ return[
     'noPostsMyProfile' => 'Sembra che tu non abbia ancora scritto un post!',
     'noPostsMyProfileSubtitle' => 'Vai nella home o nella pagina di un corso per scrivere il tuo primo post',
     'noPostsUser' => ' non ha ancora scritto un post!',
+    'editPassword' => 'Modifica password',
+    'oldPassword' => 'Vecchia password',
+    'newPassword' => 'Nuova password',
+    'password' => 'Password',
+    'passwordConfirmation' => 'Conferma nuova password',
+    'passwordUpdateWarning' => 'ATTENZIONE: l\'aggiornamento della password provocherá il logout dell\'utente',
+    'editPicture' => 'Modifica immagine',
+    'picture' => 'Immagine',
+    'removePicture' => 'Rimuovi immagine',
+    //error messages js
+    'courseNameNotEmpty' => 'Il nome del corso non può essere vuoto',
 ];

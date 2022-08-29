@@ -68,6 +68,5 @@ class db_seed extends Seeder
         $userBill = $dl->getUserID('b.gates');
 
         Course::factory()->count(5)->create(['professor_id'=>$userBill, 'uni_id'=>$userBill->uni_id]);
-        $courses_list = json_decode($dl->listCourses($userBill));
     }
 }

@@ -13,7 +13,7 @@ class Comment extends Model
     protected $primaryKey = 'comment_id';
     public $timestamps = false;
 
-    public function user() //restituisce oggetto di tipo author
+    public function user() //restituisce oggetto di tipo user
     {
         return $this->belongsTo('App\Models\SBUser', 'user_id');
     }

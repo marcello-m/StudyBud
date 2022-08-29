@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\DataLayer;
 
+use function PHPUnit\Framework\isEmpty;
+
 class CourseController extends Controller
 {
     public function index()
@@ -39,23 +41,18 @@ class CourseController extends Controller
         return view('editCourse')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('user', $user)->with('course', $course)->with('uni', $uni);
     }
 
-    public function update($courseId, Request $request)
+    public function update($course, Request $request)
     {
         // for saving just edited course
         $dl = new DataLayer();
         $userID = $dl->getUserId($_SESSION['loggedName']);
         $user = $dl->findUserById($userID);
-        $course = $dl->findCourseById($courseId);
-        $enrolled_course_list = $dl->listCoursesByUserId($userID);
-        $available_course_list = $dl->listCoursesAvailableByUserId($userID);
-        if ($user->role == "Student" and !$dl->isEnrolled($courseId, $userID)) {
-            $dl->addUserToCourse($userID, $courseId);
+        if ($user->role == "Student") {
+            $dl->addUserToCourse($userID, $course);
         } else if ($user->role == "Professor") {
-            $dl->editCourse($courseId, $request->input('name'));
+            $dl->editCourse($course, $request->input('name'));
         }
-        $enrolled_course_list = $dl->listCoursesByUserId($userID);
-        $available_course_list = $dl->listCoursesAvailableByUserId($userID);
-        return view('manageCourses')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('enrolledCoursesList', $enrolled_course_list)->with('availableCoursesList', $available_course_list)->with('user', $user);
+        return Redirect::to('/course');
     }
 
     public function store(Request $request)
@@ -79,12 +76,10 @@ class CourseController extends Controller
         $user = $dl->findUserById($userID);
         if ($user->role == "Student") {
             $dl->removeUserFromCourse($userID, $courseId);
-            $dl->deleteUserPostsinCourse($userID, $courseId);
-            $dl->deleteUserCommentsInCourse($userID, $courseId);
-            return view('manageCourses')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('enrolledCoursesList', $dl->listCoursesByUserId($userID))->with('availableCoursesList', $dl->listCoursesAvailableByUserId($userID))->with('user', $user);
+            return Redirect::to('/course');
         } else {
             $dl->deleteCourse($courseId);
-            return view('manageCourses')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('enrolledCoursesList', $dl->listCoursesByUserId($userID))->with('availableCoursesList', $dl->listCoursesAvailableByUserId($userID))->with('user', $user);
+            return Redirect::to('/course');
         }
     }
 
@@ -101,7 +96,21 @@ class CourseController extends Controller
         if ($dl->isEnrolled($userID, $id)) {
             return view('course')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('postList', $post_list)->with('courseList', $course_list)->with('user', $user)->with('course', $course)->with('professor', $professor)->with('uni', $uni);
         } else {
-            return "Voleeeevi";
+            return Redirect::to('/course');
         }
+    }
+
+    public function ajaxCourseNameCheck(Request $request)
+    {
+        $dl = new DataLayer();
+        $userID = $dl->getUserId($_SESSION['loggedName']);
+        $user = $dl->findUserById($userID);
+        $foundCourse = $dl->findCourseByNameAndUniId($request->input('name'), $user->uni_id);
+        if ($foundCourse) {
+            $response = array('found' => true); // course found
+        } else {
+            $response = array('found' => false); // course not found
+        }
+        return response()->json($response);
     }
 }

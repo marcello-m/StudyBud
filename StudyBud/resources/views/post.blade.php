@@ -18,24 +18,11 @@
         </h4>
         <div class="card post-body" style="margin-bottom:0%;">
             <div class="card-body">
-                <img src="{{url('/')}}/img/profile.png" class="rounded-circle post-image" />
+                <img src="{{url('/')}}/img/profile/{{ $post->user->profile_picture }}" class="rounded-circle post-image" />
                 <a href="{{ route('user.show', [$post->user->user_id]) }}" class="post-name">{{ $post->user->username }}</a>
                 {{ trans('labels.in') }}
                 <a href="{{ route('course.show',['course'=>$post->course_id]) }}" class="mb-3 text-muted post-course-link">{{ $post->course->name }}</a>
                 <p class="card-text" style="margin-top: 3%;">{{ $post->content }}</p>
-                <!-- Bottoni upvote/downvote -->
-                <button class="btn btn-primary btn btn-lg login post-comment-btn" style="width: 22pt;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
-                    </svg>
-                </button>
-                <span style="font-weight: 500; margin-inline: 1%;">0</span>
-                <button class="btn btn-primary btn btn-lg login post-comment-btn" style="width: 22pt;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                    </svg>
-                </button>
-                <!-- Fine bottoni upvote/downvote -->
                 @if($post->user_id == $user->user_id or ($user->role == 'Professor' and $post->course->professor_id == $user->user_id))
                 <a href="{{ route('post.destroy',['postId'=>$post->post_id]) }}">
                     <button type="button" class="btn btn-primary btn btn-lg login post-delete-btn" style="margin-left: 5%;">
@@ -60,7 +47,7 @@
                         @if(count($commentsList) > 0)
                         @foreach($commentsList as $comment)
                         <div class="d-flex flex-start" @if($comment->user->role == 'Professor')style="background:#fcf8d9;margin:10px;"@else style="margin:10px;"@endif>
-                            <img class="rounded-circle shadow-1-strong me-3" src="{{url('/')}}/img/profile.png" alt="avatar" width="65" height="65" />
+                            <img class="rounded-circle shadow-1-strong me-3" src="{{url('/')}}/img/profile/{{ $comment->user->profile_picture }}" alt="avatar" width="65" height="65" />
                             <div class="flex-grow-1 flex-shrink-1">
                                 <div>
                                     <div class="d-flex justify-content-between align-items-center">
@@ -96,12 +83,13 @@
                     </div>
                 </div>
                 @endif
-                <form action="{{ route('post.comment', ['postId'=>$post->post_id]) }}" method="post">
+                <form name="comment" action="{{ route('post.comment', ['postId'=>$post->post_id]) }}" method="post">
                     @csrf
                     <div class="input-group" style="margin-top:30px;">
-                        <input type="text" name="content" class="form-control" placeholder="{{ trans('labels.commentPlaceholder') }}">
+                        <input id="content" type="text" name="content" class="form-control" placeholder="{{ trans('labels.commentPlaceholder') }}">
                     </div>
-                    <Input type="submit" value="{{ trans('labels.post') }}" class="btn btn-primary post-button btn btn-lg login">
+                    <span id="invalid-content" class="invalid-field-message"></span>
+                    <Input type="submit" value="{{ trans('labels.post') }}" class="btn btn-primary post-button btn btn-lg login" onclick="event.preventDefault(); checkComment();">
                 </form>
             </div>
         </div>

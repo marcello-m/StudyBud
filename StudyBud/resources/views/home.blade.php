@@ -12,7 +12,7 @@
     <div class="col-md-4" style="margin-bottom: 8%;">
         <div class="card">
             <div class="flex-column align-items-center text-center">
-                <img src="{{url('/')}}/img/profile.png" alt="Admin" class="rounded-circle" style="margin-top: 10%" width="150">
+                <img src="{{url('/')}}/img/profile/{{ $user->profile_picture }}" alt="Admin" class="rounded-circle" style="margin-top: 10%" width="150" height="150">
                 <div class="mt-4">
                     <h4><a href="{{ route('user.show', [$user->user_id]) }}" style="text-decoration: none; color: #30475E;">{{ $user->full_name }}</a></h4>
                     <h6 class="text-secondary">{{ $_SESSION['loggedName'] }}</h6>
@@ -52,40 +52,30 @@
         <div class="card" style="padding: 5%;">
             @if(count($courseList)!=0)
             <!-- NEW POST -->
-            <form action="{{ route('post') }}" method="post">
+            <form name="post" action="{{ route('post') }}" method="post">
                 @csrf
                 <div class="input-group">
-                    <input type="text" name="content" class="form-control" placeholder="{{ trans('labels.postPlaceholder') }}">
+                    <input id="content" type="text" name="content" class="form-control" placeholder="{{ trans('labels.postPlaceholder') }}">
                     <select id="course" name="course" class="form-select" style="max-width:200px;">
-                        <option value="" selected disabled hidden>{{ trans('labels.chooseCourse') }}</option>
                         @foreach($courseList as $course)
                         <option value="{{ $course->course_id }}">{{ $course->name }}</option>
                         @endforeach
                     </select>
                 </div>
-                <input type="submit" value="{{ trans('labels.post') }}" class="btn btn-primary post-button btn btn-lg login">
+                <span id="invalid-content" class="invalid-field-message"></span>
+                <span id="invalid-course" class="invalid-field-message"></span>
+                <input type="submit" value="{{ trans('labels.post') }}" class="btn btn-primary post-button btn btn-lg login" onclick="event.preventDefault(); checkPost();">
             </form>
             <!-- END NEW POST -->
             @if(count($postList)!=0)
             @foreach($postList as $post)
             <div class="card post-body" @if($post->user->role == 'Professor')style="background:#fcf8d9;"@endif>
                 <div class="card-body">
-                    <img src="{{url('/')}}/img/profile.png" class="rounded-circle post-image" />
+                    <img src="{{url('/')}}/img/profile/{{ $post->user->profile_picture }}" class="rounded-circle post-image" />
                     <a href="{{ route('user.show', [$post->user_id]) }}" class="post-name">{{ $post->user->username }}</a>
                     {{ trans('labels.in') }}
                     <a href="{{ route('course.show',['course'=>$post->course_id]) }}" class="mb-3 text-muted post-course-link">{{ $post->course->name }}</a>
                     <p class="card-text" style="margin-top: 3%;">{{ $post->content }}</p>
-                    <button class="btn btn-primary btn btn-lg login post-comment-btn" style="width: 22pt;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
-                        </svg>
-                    </button>
-                    <span style="font-weight: 500; margin-inline: 1%;">0</span>
-                    <button class="btn btn-primary btn btn-lg login post-comment-btn" style="width: 22pt;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                        </svg>
-                    </button>
                     <a href="{{ route('post.show',['postId'=>$post->post_id]) }}" style="text-decoration:none;">
                         <button type="button" class="btn btn-primary btn btn-lg login post-comment-btn" style="margin-left: 5%;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-dots" viewBox="0 0 16 16">
