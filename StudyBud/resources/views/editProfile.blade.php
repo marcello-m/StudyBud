@@ -23,6 +23,7 @@
             </div>
         </div>
         <div class='card-body'>
+        <input id="uniOld" type="text" class="form-control" name="uniOld" value="{{ $user->uni_id}}" hidden>
             <div class="row">
                 <div class="col">
                     <div class="form-group">

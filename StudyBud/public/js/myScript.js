@@ -105,10 +105,15 @@ function checkUserEdit() {
 
 function checkUni() {
     uni = $("#uni");
+    uniOld = $("#uniOld");
 
     uni_msg = $("#uni-warning");
 
-    uni_msg.html("ATTENZIONE: se si cambia universitá, tutti i post e commenti verranno eliminati");
+    if (uni.val() != uniOld.val()) {
+        uni_msg.html("ATTENZIONE: se si cambia universitá, tutti i post e commenti verranno eliminati");
+    } else {
+        uni_msg.html("");
+    }
 }
 
 function checkPost() {
