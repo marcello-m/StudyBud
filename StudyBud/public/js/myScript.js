@@ -353,3 +353,19 @@ function checkLogin() {
     }
 */
 }
+
+function deleteWarningCourse() {
+    if (confirm("WARNING: the course will be deleted and all the posts and comments related to it will be lost, are you sure you want to proceed?")) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function quitWarningCourse() {
+    if (confirm("WARNING: if you leave this course all your post and comments in this course will be lost, are you sure you want to proceed?")) {
+        return true;
+    } else {
+        return false;
+    }
+}

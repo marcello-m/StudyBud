@@ -90,4 +90,6 @@ return[
     'removePicture' => 'Rimuovi immagine',
     //error messages js
     'courseNameNotEmpty' => 'Il nome del corso non può essere vuoto',
+    //warnings
+    'deleteCourseWarning' => 'ATTENZIONE: l\'eliminazione del corso provocherá la cancellazione di tutti i post e commenti associati. Sei sicuro di voler eliminare il corso?',	
 ];

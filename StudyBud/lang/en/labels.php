@@ -90,4 +90,6 @@ return[
     'removePicture' => 'Remove picture',
     //error messages js
     'courseNameNotEmpty' => 'The course name must not be empty',
+    //warnings
+    'deleteCourseWarning' => 'WARNING: the course will be deleted and all the posts and comments related to it will be lost, are you sure you want to proceed?',
 ];

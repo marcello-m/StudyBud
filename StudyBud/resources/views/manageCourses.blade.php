@@ -29,9 +29,10 @@
                                 <br>
                                 @if($user->role=='Professor')
                                 <a href="{{ route('course.edit',['course'=>$course->course_id]) }}" class="menuhome orange-link course-card-link">{{ trans('labels.edit') }}</a>
-                                <a href="{{ route('course.destroy',['course'=>$course->course_id]) }}" class="menuhome orange-link course-card-link" style="color: #b60000;margin-left:80px;">{{ trans('labels.delete') }}</a>
+                                <span id="warningTxt" value="{{ trans('labels.deleteCourseWarning') }}"></span>
+                                <a id="deleteCourse" href="{{ route('course.destroy',['course'=>$course->course_id]) }}" class="menuhome orange-link course-card-link" style="color: #b60000;margin-left:80px;" onclick="return deleteWarningCourse();">{{ trans('labels.delete') }}</a>
                                 @else
-                                <a href="{{ route('course.destroy',['course'=>$course->course_id]) }}" class="menuhome orange-link course-card-link" style="color: #b60000;">{{ trans('labels.quit') }}</a>
+                                <a id="quitCourse" href="{{ route('course.destroy',['course'=>$course->course_id]) }}" class="menuhome orange-link course-card-link" style="color: #b60000;" onclick="return quitWarningCourse();">{{ trans('labels.quit') }}</a>
                                 @endif
                             </div>
                         </div>
