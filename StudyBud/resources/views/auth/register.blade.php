@@ -14,6 +14,7 @@
     <input id="username" type="text" name="username" placeholder="{{ trans('labels.username') }}" class="campi">
     <span id="invalid-username" class="invalid-field-message"></span>
     <select id="uni" name="uni_id" class="campi" style="background-color:rgba(34, 40, 49, 0.85);">
+        <option value="selectUni" selected hidden>{{ trans('labels.uni') }}</option>
         @foreach($uniList as $uni)
         <option value="{{ $uni->uni_id }}">{{ $uni->name }}</option>
         @endforeach
@@ -22,6 +23,7 @@
     <input id="major" type="text" name="major" placeholder="{{ trans('labels.major') }}" class="campi">
     <span id="invalid-major" class="invalid-field-message"></span>
     <select id="role" name="role" class="campi" style="background-color:rgba(34, 40, 49, 0.85);">
+        <option value="selectRole" selected hidden>{{ trans('labels.role') }}</option>
         <option value="Student">{{ trans('labels.student') }}</option>
         <option value="Professor">{{ trans('labels.professor') }}</option>
     </select>

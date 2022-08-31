@@ -332,11 +332,28 @@ function checkRegistration() {
         fullName_msg.html("");
     }
 
+    if (uni.val().trim() == "selectUni") {
+        uni_msg.html("You must select a university");
+        uni.focus();
+        error = true;
+    } else {
+        uni_msg.html("");
+    }
+
+    if (role.val().trim() == "selectRole") {
+        role_msg.html("You must select a role");
+        role.focus();
+        error = true;
+    } else {
+        role_msg.html("");
+    }
+
+
     if (!error) {
         $('form[name=register]').submit();
     }
 
-    /*
+/*
     if (!error) {
         $.ajax({
             type: 'POST',
@@ -379,7 +396,7 @@ function checkLogin() {
     } else {
         username_msg.html("");
     }
-    
+
     if (!error) {
         $.ajax({
             type: 'GET',
