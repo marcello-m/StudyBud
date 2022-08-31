@@ -21,6 +21,18 @@ class DataLayer extends Model
         return $posts;
     }
 
+    public function listCourses()
+    {
+        $courses = Course::all();
+        return $courses;
+    }
+
+    public function listPosts()
+    {
+        $posts = Post::all();
+        return $posts;
+    }
+
     public function listPostsByUserIdAndEnrollment($user, $loggedUser)
     {
         // get post list by user id and remove posts that are not enrolled by logged user
@@ -68,6 +80,12 @@ class DataLayer extends Model
         return $posts;
     }
 
+    public function listCoursesByProfessor($professor_id)
+    {
+        $courses = Course::where('professor_id', $professor_id)->get();
+        return $courses;
+    }
+
     public function listUniversities()
     {
         $universities = University::all();
@@ -78,6 +96,12 @@ class DataLayer extends Model
     {
         $comments = Comment::where('post_id', $postId)->orderBy('comment_id', 'asc')->get();
         return $comments;
+    }
+
+    public function listEnrolledUsers($courseId)
+    {
+        $users = Course::find($courseId)->users;
+        return $users;
     }
 
     public function findUserById($id)
@@ -239,6 +263,9 @@ class DataLayer extends Model
     public function addUserToCourse($userID, $courseID)
     {
         $course = Course::find($courseID);
+        if($this->isEnrolled($userID, $courseID)){
+            return false;
+        }
         $course->users()->attach($userID);
     }
 

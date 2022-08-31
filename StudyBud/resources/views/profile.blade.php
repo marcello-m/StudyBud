@@ -12,7 +12,7 @@
 <!-- PROFILE PIC AND GENERAL INFO -->
 <div class="row gutters-sm">
     <div class="col-md-4 mb-3">
-        <div class="card h-100">
+        <div class="card">
             <div>
                 <div class="d-flex flex-column align-items-center text-center" style="margin-top: 10%;">
                     <img src="{{url('/')}}/img/profile/{{ $user->profile_picture }}" alt="Admin" class="rounded-circle" width="150" height="150">
@@ -57,7 +57,7 @@
 
     <!-- PROFILE DETAILS -->
 
-    <div class="col-md-8">
+    <div class="col-md-8 mb-3">
         <div class="card mb-3">
             <div class="card-body" style="margin-top:2%;">
                 <div class="row">

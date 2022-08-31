@@ -78,6 +78,7 @@ class CourseController extends Controller
             $dl->removeUserFromCourse($userID, $courseId);
             return Redirect::to('/course');
         } else {
+            $dl->removeUserFromCourse($userID, $courseId);
             $dl->deleteCourse($courseId);
             return Redirect::to('/course');
         }
