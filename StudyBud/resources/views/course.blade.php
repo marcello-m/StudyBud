@@ -32,7 +32,7 @@
             <div class="card-body">
                 <p style="font-weight: 600; text-align: center; text-transform:uppercase">{{ trans('labels.activeCourses') }}</p>
                 @foreach($courseList as $coursePanel)
-                <div class="card" style="margin-bottom:20px;">
+                <div class="card" style="margin-bottom:20px; background:#f2f7ff;">
                     <div class="card-body">
                         <a href="{{ route('course.show',['course'=>$coursePanel->course_id]) }}" style="text-decoration:none; color:black;">
                             <h5 class="card-title">{{ $coursePanel->name }}</h5>
@@ -49,7 +49,7 @@
     <!-- END PROPIC AND INFO -->
 
     <!-- POST FEED -->
-    <div class="col" style="margin-bottom: 8%;">
+    <div class="col mb-3">
         <div class="card" style="padding: 5%;">
             <h1 style="color: #30475E;">{{$course->name}}</h1>
             <h6><b>{{ trans('labels.professor') }}: </b><a href="{{ route('user.show', [$professor->user_id]) }}" style="text-decoration:none; color:#f2a365">{{$professor->full_name}}</a></h6>
@@ -65,7 +65,7 @@
             <!-- END NEW POST -->
             @if(count($postList)!=0)
             @foreach($postList as $post)
-            <div id="postCard" class="card post-body" @if($post->user->role == 'Professor')style="background:#fcf8d9;"@endif>
+            <div id="postCard" class="card post-body" @if($post->user->role == 'Professor')style="background:#ffece4;"@else style="background:#f2f7ff"@endif>
                 <div class="card-body">
                     <img src="{{url('/')}}/img/profile/{{ $post->user->profile_picture }}" class="rounded-circle post-image" />
                     <a href="{{ route('user.show', [$post->user->user_id]) }}" class="post-name">{{ $post->user->username }}</a>
