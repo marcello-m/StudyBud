@@ -68,7 +68,7 @@
             <div id="postCard" class="card post-body" @if($post->user->role == 'Professor')style="background:#fcf8d9;"@endif>
                 <div class="card-body">
                     <img src="{{url('/')}}/img/profile/{{ $post->user->profile_picture }}" class="rounded-circle post-image" />
-                    <a href="{{ route('user.show', [$user->user_id]) }}" class="post-name">{{ $post->user->username }}</a>
+                    <a href="{{ route('user.show', [$post->user->user_id]) }}" class="post-name">{{ $post->user->username }}</a>
                     {{ trans('labels.in') }}
                     <a href="{{ route('course.show',['course'=>$post->course_id]) }}" class="mb-3 text-muted post-course-link">{{ $post->course->name }}</a>
                     <p class="card-text" style="margin-top: 3%;">{{ $post->content }}</p>
