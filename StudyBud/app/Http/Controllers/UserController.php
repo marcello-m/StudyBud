@@ -114,10 +114,31 @@ class UserController extends Controller
     public function ajaxUser(Request $request)
     {
         $dl = new DataLayer();
-        if ($dl->usernameExists($request->input('username'))) {
-            $response = array('found' => true); // username found
+        $userID = $dl->getUserId($_SESSION['loggedName']);
+
+        if ($dl->usernameExists($request->input('username'), $userID)) {
+            $response1 = array('foundUser' => true); // username found
         } else {
-            $response = array('found' => false); // username not found
+            $response1 = array('foundUser' => false); // username not found
+        }
+        
+        if ($dl->emailExists($request->input('email'), $userID)) {
+            $response2 = array('foundEmail' => true); // email found
+        } else {
+            $response2 = array('foundEmail' => false); // email not found
+        }
+
+        return response()->json(array_merge($response1, $response2));
+    }
+
+    public function ajaxPassword(Request $request)
+    {
+        $dl = new DataLayer();
+        $userID = $dl->getUserId($_SESSION['loggedName']);
+        if ($dl->passwordCorrect($userID, $request->input('password'))) {
+            $response = array('correctPassword' => true); // password correct
+        } else {
+            $response = array('correctPassword' => false); // password not correct
         }
         return response()->json($response);
     }

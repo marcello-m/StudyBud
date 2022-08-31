@@ -317,9 +317,45 @@ class DataLayer extends Model
         }
     }
 
-    public function usernameExists($username)
+    public function usernameExists($username, $loggedUser)
     {
         $user = SBUser::where('username', $username)->get();
+        if (count($user) == 0) {
+            return false;
+        } else {
+            if($user[0]->user_id == $loggedUser){
+                return false;
+            }
+            return true;
+        }
+    }
+
+    public function usernameExistsReg($username)
+    {
+        $user = SBUser::where('username', $username)->get();
+        if (count($user) == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function emailExists($email, $loggedUser)
+    {
+        $user = SBUser::where('email', $email)->get();
+        if (count($user) == 0) {
+            return false;
+        } else {
+            if($user[0]->user_id == $loggedUser){
+                return false;
+            }
+            return true;
+        }
+    }
+
+    public function emailExistsReg($email)
+    {
+        $user = SBUser::where('email', $email)->get();
         if (count($user) == 0) {
             return false;
         } else {
