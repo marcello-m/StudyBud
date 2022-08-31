@@ -323,7 +323,6 @@ function checkRegistration() {
 function checkLogin() {
     username = $("#username");
     password = $("#password");
-    error = false;
 
     username_msg = $("#invalid-username");
     password_msg = $("#invalid-password");
@@ -333,34 +332,38 @@ function checkLogin() {
         password_msg.html("The password must not be empty");
         password.focus();
         error = true;
+    } else {
+        password_msg.html("");
     }
+
     if (username.val().trim() == "") {
         username_msg.html("The username must not be empty");
         username.focus();
         error = true;
+    } else {
+        username_msg.html("");
     }
-
-    if (!error) {
-        $('form[name=login]').submit();
-    }
-    /*
+    
     if (!error) {
         $.ajax({
-            type: 'POST',
-            url: '/login',
+            type: 'GET',
+            url: '/ajaxLogin',
+            headers: {
+                'X-CSRF-Token': '{{ csrf_token() }}',
+            },
+            dataType: 'json',
             data: { password: password.val(), username: username.val() },
             success: function (data) {
-                if (data.found) {
+                if (data.logged) {
+                    $('form[name=login]').submit();
+                } else {
                     error = true;
                     username_msg.html("");
                     password_msg.html("Wrong credentials");
-                } else {
-                    $('form[name=login]').submit();
                 }
             }
         });
     }
-*/
 }
 
 function deleteWarningCourse() {

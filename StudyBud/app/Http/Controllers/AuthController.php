@@ -27,8 +27,6 @@ class AuthController extends Controller
             $_SESSION['loggedName'] = $request->input('username');
             return Redirect::to('/');
         } else {
-            $_SESSION['login_error']=true;
-            // forse mettere vista con errore
             return view('auth/login');
         }
     }

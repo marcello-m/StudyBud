@@ -28,7 +28,8 @@ Route::get('/user/logout', [AuthController::class, 'logout'])->name('user.logout
 
 Route::get('/', [FrontController::class, 'getHome'])->middleware('lang')->name('index');
 
-Route::get('/ajaxRegister', [UserController::class, 'ajaxRegister'])->name('ajaxRegister');
+Route::get('/ajaxRegister', [AuthController::class, 'ajaxRegister'])->name('ajaxRegister');
+Route::get('/ajaxLogin', [AuthController::class, 'ajaxLogin'])->name('ajaxLogin');
 });
 
 Route::middleware('auth.custom', 'lang')->group(function () {
