@@ -14,7 +14,11 @@ function checkCourseTitle() {
         $.ajax({
             type: 'GET',
             url: '/ajaxCourse',
-            data: { courseName: courseName.val().trim() },
+            headers: {
+                'X-CSRF-Token': '{{ csrf_token() }}',
+            },
+            dataType: 'json',
+            data: { name: courseName.val(), id: courseId.val() },
             success: function (data) {
                 if (data.found) {
                     error = true;

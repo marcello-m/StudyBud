@@ -105,7 +105,7 @@ class CourseController extends Controller
         $dl = new DataLayer();
         $userID = $dl->getUserId($_SESSION['loggedName']);
         $user = $dl->findUserById($userID);
-        $foundCourse = $dl->findCourseByNameAndUniId($request->input('name'), $user->uni_id);
+        $foundCourse = $dl->findCourseByNameAndUniId($request->input('name'), $user->uni_id, $request->input('id'));
         if ($foundCourse) {
             $response = array('found' => true); // course found
         } else {

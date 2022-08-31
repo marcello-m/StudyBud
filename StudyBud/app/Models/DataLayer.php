@@ -104,11 +104,13 @@ class DataLayer extends Model
         return $course;
     }
 
-    // find a course given the course name and the university id, return true if it exists, false otherwise
-    public function findCourseByNameAndUniId($name, $uniId)
+    public function findCourseByNameAndUniId($name, $uniId, $editedCourseId)
     {
         $course = Course::where('name', $name)->where('uni_id', $uniId)->get();
         if (count($course) > 0) {
+            if($course[0]->course_id == $editedCourseId){
+                return false;
+            }
             return true;
         } else {
             return false;
