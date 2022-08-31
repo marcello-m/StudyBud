@@ -369,4 +369,10 @@ class DataLayer extends Model
         $user->profile_picture = $picture;
         $user->save();
     }
+
+    public function passwordCorrect($id, $password)
+    {
+        $user = SBUser::find($id);
+        return (md5($password) == ($user->password));
+    }
 }

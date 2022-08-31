@@ -212,6 +212,18 @@ function checkEditPassword() {
         newPassword_msg.html("");
     }
 
+    if (newPassword.val() !== confirmPassword.val()) {
+        confirmPassword_msg.html("The new password and the confirm password must be the same");
+        confirmPassword.focus();
+        error = true;
+    }
+
+    if (newPassword.val() === oldPassword.val()) {
+        newPassword_msg.html("The old password and the new password can not be the same");
+        newPassword.focus();
+        error = true;
+    }
+
     if (oldPassword.val().length === 0) {
         oldPassword_msg.html("The old password must not be empty");
         oldPassword.focus();
@@ -220,16 +232,30 @@ function checkEditPassword() {
         oldPassword_msg.html("");
     }
 
-    if (newPassword.val() !== confirmPassword.val()) {
-        confirmPassword_msg.html("The new password and the confirm password must be the same");
-        confirmPassword.focus();
-        error = true;
-    }
+    /*
+        if (!error) {
+            $('form[name=editPassword]').submit();
+        }
+    */
 
-    if (!error) {
-        $('form[name=editPassword]').submit();
-    }
-
+    $.ajax({
+        type: 'GET',
+        url: '/ajaxPassword',
+        headers: {
+            'X-CSRF-Token': '{{ csrf_token() }}',
+        },
+        dataType: 'json',
+        data: { password: oldPassword.val() },
+        success: function (data) {
+            if (!data.correctPassword) {
+                error = true;
+                oldPassword_msg.html("Wrong password");
+                oldPassword.focus();
+            } else if (!error) {
+                $('form[name=editPassword]').submit();
+            }
+        }
+    });
 }
 
 

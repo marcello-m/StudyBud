@@ -55,6 +55,7 @@ Route::middleware('auth.custom', 'lang')->group(function () {
 
     Route::get('/ajaxCourse', [CourseController::class, 'ajaxCourseNameCheck'])->name('ajaxCourse');
     Route::get('/ajaxUser', [UserController::class, 'ajaxUser'])->name('ajaxUser');
+    Route::get('/ajaxPassword', [UserController::class, 'ajaxPassword'])->name('ajaxPassword');
 });
 
 /*
