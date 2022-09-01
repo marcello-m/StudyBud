@@ -22,7 +22,7 @@
                     @foreach($enrolledCoursesList as $course)
                     <div class="col-md-4" style="margin-top: 22px;">
                         <div class="card h-100">
-                            <div class="card-body">
+                            <div class="card-body" style="background:#f2f7ff">
                                 <a href="{{ route('course.show',['course'=>$course->course_id]) }}" style="text-decoration:none; color:black;">
                                     <h5 class="card-title">{{ $course->name }}</h5>
                                 </a>
@@ -76,7 +76,7 @@
                     @foreach($availableCoursesList as $course)
                     <div class="col-md-4" style="margin-top: 20px;">
                         <div class="card h-100">
-                            <div class="card-body">
+                            <div class="card-body" style="background:#f2f7ff">
                                 <h5 class="card-title">{{ $course->name }}</h5>
                                 <br>
                                 <a href="{{ route('course.update',['course'=>$course->course_id]) }}" class="menuhome orange-link course-card-link" style="color: #06a700;">{{ trans('labels.enroll') }}</a>

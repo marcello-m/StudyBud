@@ -29,6 +29,7 @@ return[
     'all' => 'Tutti',
     'onlyProf' => 'Solo Professori',
     'showPosts' => 'Mostra i post',
+    'backTop' => 'Torna su',
     //courses
     'activeCourses' => 'Corsi attivi',
     'accessCourse' => 'Accedi al corso',
@@ -66,6 +67,7 @@ return[
     'noComments' => 'Sembra che nessuno abbia ancora commentato questo post!',
     'noCommentsSubtitle' => 'Scrivi il primo commento nel campo sotto',
     'commentPlaceholder' => 'Scrivi un commento...',
+    'all' => 'Tutti',
     //buttons
     'saveChanges' => 'Salva modifiche',
     'create' => 'Crea',

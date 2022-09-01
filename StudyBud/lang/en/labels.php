@@ -29,6 +29,7 @@ return[
     'all' => 'All',
     'onlyProf' => 'Only professors',
     'showPosts' => 'Show posts',
+    'backTop' => 'Top',
     //courses
     'activeCourses' => 'Active courses',
     'accessCourse' => 'Access course',
@@ -66,6 +67,7 @@ return[
     'noComments' => 'It seems that no one has written a comment yet!',
     'noCommentsSubtitle' => 'Write the first comment in the field below',
     'commentPlaceholder' => 'Write a comment...',
+    'all' => 'All',
     //buttons
     'saveChanges' => 'Save changes',
     'create' => 'Create',
