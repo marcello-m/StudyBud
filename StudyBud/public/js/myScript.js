@@ -124,7 +124,7 @@ function checkUni() {
     uni_msg = $("#uni-warning");
 
     if (uni.val() != uniOld.val()) {
-        uni_msg.html("ATTENZIONE: se si cambia universitá, tutti i post e commenti verranno eliminati");
+        uni_msg.html("WARNING: if the university is changed, all the posts and comments related to it will be lost");
     } else {
         uni_msg.html("");
     }
