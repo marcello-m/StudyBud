@@ -19,7 +19,7 @@
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript" class="init">
         $(document).ready(function() {
-            $('#example').DataTable();
+            $('#table').DataTable();
         });
     </script>
 </head>

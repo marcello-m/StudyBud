@@ -48,6 +48,9 @@ return[
     'availableCourses' => 'Available courses',
     'createNewCourse' => 'Create a new course',
     'isNotEnrolled' => ' is not enrolled in any course!',
+    'members' => 'Members',
+    'seeList' => 'see list',
+    'membersList' => 'Members list',
     //post
     'post' => 'Post',
     'postPlaceholder' => 'Write a post...',

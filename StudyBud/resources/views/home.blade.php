@@ -52,6 +52,7 @@
     <!-- POST FEED -->
     <div class="col mb-3">
         <div class="card" style="padding: 5%;">
+            <h1 style="color: #30475E; margin-bottom:30px;">{{trans('labels.home')}}</h1>
             @if(count($courseList)!=0)
             <!-- NEW POST -->
             <form name="post" action="{{ route('post') }}" method="post">

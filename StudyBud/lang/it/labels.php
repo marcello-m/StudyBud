@@ -48,6 +48,9 @@ return[
     'availableCourses' => 'Corsi disponibili',
     'createNewCourse' => 'Crea un nuovo corso',
     'isNotEnrolled' => ' non è iscritto a nessun corso!',
+    'members' => 'Membri',
+    'seeList' => 'vedi lista',
+    'membersList' => 'Lista dei membri',
     //post
     'post' => 'Post',
     'postPlaceholder' => 'Scrivi un post...',

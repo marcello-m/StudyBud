@@ -44,6 +44,7 @@ Route::middleware('auth.custom', 'lang')->group(function () {
     Route::resource('/course', CourseController::class);
     Route::get('/course/{course}/destroy', [CourseController::class, 'destroy'])->name('course.destroy');
     Route::get('/course/{course}/update', [CourseController::class, 'update'])->name('course.update');
+    Route::get('/course/{course}/members', [CourseController::class, 'members'])->name('course.members');
 
     Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
     Route::get('/user/{userId}/update', [UserController::class, 'update'])->name('user.update');

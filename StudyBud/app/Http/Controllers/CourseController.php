@@ -101,6 +101,17 @@ class CourseController extends Controller
         }
     }
 
+    public function members($courseId)
+    {
+        $dl = new DataLayer();
+        $userID = $dl->getUserId($_SESSION['loggedName']);
+        $user = $dl->findUserById($userID);
+        $course = $dl->findCourseById($courseId);
+        $uni = $dl->findUniversityById($user->uni_id);
+        $member_list = $dl->listCourseMembers($course);
+        return view('courseMembers')->with('logged', true)->with('loggedName', $_SESSION['loggedName'])->with('membersList', $member_list)->with('user', $user)->with('course', $course)->with('uni', $uni);
+    }
+
     public function ajaxCourseNameCheck(Request $request)
     {
         $dl = new DataLayer();

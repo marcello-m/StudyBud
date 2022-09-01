@@ -27,6 +27,11 @@ class DataLayer extends Model
         return $courses;
     }
 
+    public function listCourseMembers($course)
+    {
+        return $course->users()->get(); 
+    }
+
     public function listPosts()
     {
         $posts = Post::all();

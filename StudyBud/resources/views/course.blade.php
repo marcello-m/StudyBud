@@ -55,6 +55,7 @@
         <div class="card" style="padding: 5%;">
             <h1 style="color: #30475E;">{{$course->name}}</h1>
             <h6><b>{{ trans('labels.professor') }}: </b><a href="{{ route('user.show', [$professor->user_id]) }}" style="text-decoration:none; color:#f2a365">{{$professor->full_name}}</a></h6>
+            <h6><b>{{ trans('labels.members') }}: </b><a href="{{ route('course.members', [$course->course_id]) }}" style="text-decoration:none; color:#f2a365">{{ trans('labels.seeList') }}</a></h6>
             <!-- NEW POST -->
             <form name="post" action="{{ route('post.course', ['course'=>$course->course_id]) }}" method="post">
                 @csrf
