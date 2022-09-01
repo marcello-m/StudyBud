@@ -110,6 +110,6 @@
     </div>
 </div>
 <!-- END POST FEED -->
-
 </div>
+<button onclick="topFunction()" id="myBtn" title="Go to top">{{ trans('labels.backTop') }}</button>
 @endsection

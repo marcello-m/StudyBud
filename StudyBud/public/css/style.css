@@ -194,3 +194,24 @@
     font-weight: 700;
     margin-left:10px;
 }
+
+#myBtn {
+    /*display: none;*/
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 99; 
+    border: 2px solid #f2a365;
+    border-radius: 10px;
+    font-size: 100%;
+    font-weight: 600;
+    color: #f2a365;
+    background-color:rgba(242, 163, 101, 0.2);
+    transition: 0.25s;
+    height: 30px;
+  }
+  
+  #myBtn:hover {
+    background-color: #f2a365;
+    color:white;
+  }

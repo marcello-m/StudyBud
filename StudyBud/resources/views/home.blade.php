@@ -129,6 +129,7 @@
         </div>
     </div>
 </div>
+<button onclick="topFunction()" id="myBtn" title="Go to top">{{ trans('labels.backTop') }}</button>
 <!-- END POST FEED -->
 
 </div>

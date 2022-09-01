@@ -203,4 +203,5 @@
     </div>
     <!-- END MY POSTS -->
 </div>
+<button onclick="topFunction()" id="myBtn" title="Go to top">{{ trans('labels.backTop') }}</button>
 @endsection
