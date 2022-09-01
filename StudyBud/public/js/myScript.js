@@ -379,29 +379,39 @@ function checkRegistration() {
         role_msg.html("");
     }
 
-
+/*
     if (!error) {
         $('form[name=register]').submit();
     }
+*/
 
-/*
     if (!error) {
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/ajaxRegister',
-            data: { username: username.val().trim() },
+            headers: {
+                'X-CSRF-Token': '{{ csrf_token() }}',
+            },
+            dataType: 'json',
+            data: { username: username.val().trim(), email: email.val().trim() },
             success: function (data) {
-                if (data.found) {
+                if (data.foundEmail) {
+                    error = true;
+                    email_msg.html("This email is already registered");
+                    email.focus();
+                }
+                if (data.foundUser) {
                     error = true;
                     username_msg.html("The username already exists");
                     username.focus();
-                } else {
+                }
+                if (!error) {
                     $('form[name=register]').submit();
                 }
             }
         });
     }
-    */
+    
 }
 
 function checkLogin() {

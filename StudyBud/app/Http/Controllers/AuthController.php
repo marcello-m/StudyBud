@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Redirect;
 class AuthController extends Controller
 {
     public function authentication(){
-        $_SESSION['login_error']=false;
         return view('auth.login');
     }
 
@@ -47,14 +46,20 @@ class AuthController extends Controller
 
     public function ajaxRegister(Request $request){
         $dl = new DataLayer();
-        $username = $request->input('username');
-        $foundUsername = $dl->usernameExists($username);
-        if ($foundUsername){
-            $response = array('found' => true); // username found
+
+        if ($dl->usernameExistsReg($request->input('username'))) {
+            $response1 = array('foundUser' => true); // username found
         } else {
-            $response = array('found' => false); // username not found
+            $response1 = array('foundUser' => false); // username not found
         }
-        return response()->json($response);
+        
+        if ($dl->emailExistsReg($request->input('email'))) {
+            $response2 = array('foundEmail' => true); // email found
+        } else {
+            $response2 = array('foundEmail' => false); // email not found
+        }
+        
+        return response()->json(array_merge($response1, $response2));
     }
 
     public function ajaxLogin(Request $request){
