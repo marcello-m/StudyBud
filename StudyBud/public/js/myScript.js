@@ -148,6 +148,37 @@ function checkPost() {
     }
 }
 
+function checkPostHome() {
+    content = $("#content");
+    course = $("#course");
+
+    content_msg = $("#invalid-content");
+    course_msg = $("#invalid-course");
+
+    error = false;
+
+    if (course.val() === "selectCourse") {
+        course_msg.html("Select a course");
+        course.focus();
+        error = true;
+    } else {
+        course_msg.html("");
+    }
+
+    if (content.val().trim() == "") {
+        course_msg.html("");
+        content_msg.html("The post content must not be empty");
+        content.focus();
+        error = true;
+    } else {
+        content_msg.html("");
+    }
+
+    if (!error) {
+        $('form[name=post]').submit();
+    }
+}
+
 function checkComment() {
     content = $("#content");
 

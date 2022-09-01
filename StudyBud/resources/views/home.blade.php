@@ -59,14 +59,15 @@
                 <div class="input-group">
                     <input id="content" type="text" name="content" class="form-control" placeholder="{{ trans('labels.postPlaceholder') }}">
                     <select id="course" name="course" class="form-select" style="max-width:200px;">
+                        <option value="selectCourse" selected hidden>{{ trans('labels.selectCourse') }}</option>
                         @foreach($courseList as $course)
                         <option value="{{ $course->course_id }}">{{ $course->name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <span id="invalid-content" class="invalid-field-message"></span>
-                <span id="invalid-course" class="invalid-field-message"></span>
-                <input type="submit" value="{{ trans('labels.post') }}" class="btn btn-primary post-button btn btn-lg login" onclick="event.preventDefault(); checkPost();">
+                <span id="invalid-course" class="invalid-field-message" style="margin-right:200px;"></span>
+                <input type="submit" value="{{ trans('labels.post') }}" class="btn btn-primary post-button btn btn-lg login" onclick="event.preventDefault(); checkPostHome();">
             </form>
             <!-- END NEW POST -->
             @if(count($postList)!=0)

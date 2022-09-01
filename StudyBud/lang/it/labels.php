@@ -56,7 +56,7 @@ return[
     'deletePost' => 'Elimina post',
     'noPosts' => 'Sembra che nessuno abbia ancora scritto un post!',
     'noPostsSubtitle' => 'Scrivi un nuovo post nel campo sopra',
-    'chooseCourse' => 'Scegli un corso',
+    'selectCourse' => 'Scegli un corso',
     'postBy' => 'Post di',
     'postAuthor' => 'autore del post',
     'deleteComment' => 'Elimina commento',

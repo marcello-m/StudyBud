@@ -56,7 +56,7 @@ return[
     'deletePost' => 'Delete post',
     'noPosts' => 'It seems that no one has written a post yet!',
     'noPostsSubtitle' => 'Write a new post in the field above',
-    'chooseCourse' => 'Choose a course',
+    'selectCourse' => 'Select a course',
     'postBy' => 'Post by',
     'postAuthor' => 'post author',
     'deleteComment' => 'Delete comment',
