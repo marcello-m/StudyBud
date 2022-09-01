@@ -74,7 +74,7 @@
                 <!-- AVAILABLE COURSES -->
                 <div class="row">
                     @foreach($availableCoursesList as $course)
-                    <div class="col-md-4" style="margin-top: 22px;">
+                    <div class="col-md-4" style="margin-top: 20px;">
                         <div class="card h-100">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $course->name }}</h5>

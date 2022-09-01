@@ -18,7 +18,9 @@
         </h4>
         <div class="card post-body" style="margin-bottom:0%;">
             <div class="card-body" style="background:#f2f7ff;">
-                <img src="{{url('/')}}/img/profile/{{ $post->user->profile_picture }}" class="rounded-circle post-image" />
+                <a href="{{ route('user.show', [$post->user_id]) }}" style="text-decoration:none;">
+                    <img src="{{url('/')}}/img/profile/{{ $post->user->profile_picture }}" class="rounded-circle post-image" style="width:65px; height:65px; margin-left:10px" />
+                </a>
                 <a href="{{ route('user.show', [$post->user->user_id]) }}" class="post-name">{{ $post->user->username }}</a>
                 {{ trans('labels.in') }}
                 <a href="{{ route('course.show',['course'=>$post->course_id]) }}" class="mb-3 text-muted post-course-link">{{ $post->course->name }}</a>
@@ -47,7 +49,9 @@
                         @if(count($commentsList) > 0)
                         @foreach($commentsList as $comment)
                         <div class="d-flex flex-start" @if($comment->user->role == 'Professor')style="background:#ffece4;margin:10px;border-radius:30px;"@else style="margin:10px; background:#f2f7ff; border-radius:30px"@endif>
-                            <img class="rounded-circle shadow-1-strong me-3" src="{{url('/')}}/img/profile/{{ $comment->user->profile_picture }}" alt="avatar" width="65" height="65" />
+                            <a href="{{ route('user.show', [$comment->user_id]) }}" style="text-decoration:none;">
+                                <img class="rounded-circle shadow-1-strong me-3" src="{{url('/')}}/img/profile/{{ $comment->user->profile_picture }}" alt="avatar" width="65" height="65" />
+                            </a>
                             <div class="flex-grow-1 flex-shrink-1">
                                 <div>
                                     <div class="d-flex justify-content-between align-items-center">

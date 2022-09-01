@@ -15,7 +15,9 @@
         <div class="card">
             <div>
                 <div class="d-flex flex-column align-items-center text-center" style="margin-top: 10%;">
-                    <img src="{{url('/')}}/img/profile/{{ $user->profile_picture }}" alt="Admin" class="rounded-circle" width="150" height="150">
+                    <a href="{{ route('user.show', [$user->user_id]) }}">
+                        <img src="{{url('/')}}/img/profile/{{ $user->profile_picture }}" alt="Admin" class="rounded-circle" width="150" height="150">
+                    </a>
                     @if($user->user_id == $loggedUser->user_id)
                     <a href="{{ route('user.edit.picture',['userId'=>$user->user_id]) }}" style="text-decoration: none;">
                         <button type="submit" class="btn btn-primary post-button btn btn-lg login" style="align-content:center; min-width:200px; height:40px;">
@@ -144,7 +146,9 @@
             @foreach($postList as $post)
             <div class="card post-body" @if($post->user->role == 'Professor')style="background:#ffece4;"@else style="background:#f2f7ff"@endif>
                 <div class="card-body">
-                    <img src="{{url('/')}}/img/profile/{{ $post->user->profile_picture }}" class="rounded-circle post-image" />
+                    <a href="{{ route('user.show', [$user->user_id]) }}" style="text-decoration:none;">
+                        <img src="{{url('/')}}/img/profile/{{ $post->user->profile_picture }}" class="rounded-circle post-image" />
+                    </a>
                     <a href="{{ route('user.show', [$post->user_id]) }}" class="post-name">{{ $post->user->username }}</a>
                     {{ trans('labels.in') }}
                     <a href="{{ route('course.show',['course'=>$post->course_id]) }}" class="mb-3 text-muted post-course-link">{{ $post->course->name }}</a>
